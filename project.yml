@@ -1,0 +1,245 @@
+# https://github.com/yonaskolb/XcodeGen/blob/master/Docs/ProjectSpec.md
+
+# プロジェクト名（PCSwiftUI）で検索して、適切なプロジェクト名に置換する
+
+# プロジェクト全体の設定
+name: PCSwiftUI
+fileGroups: [PCSwiftUI]
+configs:
+  Debug: debug
+  Release: release
+configFiles:
+  Debug: configs/Debug.xcconfig
+  Release: configs/Release.xcconfig
+options:
+  minimumXcodeGenVersion: "2.25.0"
+  usesTabs: false
+  indentWidth: 2
+  tabWidth: 2
+  deploymentTarget:
+    iOS: "14.0"
+  developmentLanguage: ja
+attributes:
+  ORGANIZATIONNAME: ""
+
+####################
+
+# ビルドターゲット
+targets:
+  # AppMainターゲット
+  PCSwiftUI:
+    type: application
+    platform: iOS
+    configFiles:
+      Debug: configs/Debug.xcconfig
+      Release: configs/Release.xcconfig
+    sources:
+      - path: PCSwiftUI
+        excludes:
+          - "**/.gitkeep"
+          - "**/*.md"
+    dependencies:
+      - target: DataStore
+      - target: Domain
+      - target: Presentation
+    postCompileScripts:
+      - path: ./scripts/swiftlint.sh
+        name: SwiftLint
+####################
+  # DataStoreフレームワーク
+  DataStore:
+    type: framework
+    platform: iOS
+    configFiles:
+      Debug: configs/DataStore.xcconfig
+      Release: configs/DataStore.xcconfig
+    sources:
+      - path: DataStore
+        excludes:
+          - "**/.gitkeep"
+          - "**/*.md"
+    # dependencies:
+
+####################
+  # Domainフレームワーク
+  Domain:
+    type: framework
+    platform: iOS
+    configFiles:
+      Debug: configs/Domain.xcconfig
+      Release: configs/Domain.xcconfig
+    sources:
+      - path: Domain
+        excludes:
+          - "**/.gitkeep"
+          - "**/*.md"
+    dependencies:
+      - target: DataStore
+
+ ####################
+   # Presentationフレームワーク
+  Presentation:
+    type: framework
+    platform: iOS
+    configFiles:
+      Debug: configs/Presentation.xcconfig
+      Release: configs/Presentation.xcconfig
+    sources:
+      - path: Presentation
+        excludes:
+          - "**/.gitkeep"
+          - "**/*.md"
+    dependencies:
+      - target: Domain
+
+ ####################
+  # DataStore.frameworkのUnitTestターゲット
+  DataStoreTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'DataStore.tests'
+      configs:
+        Debug:
+          VALIDATE_WORKSPACE: YES
+    sources:
+      - DataStoreTests
+    dependencies:
+      - target: DataStore
+  # Domain.frameworkのUnitTestターゲット
+  DomainTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'Domain.tests'
+      configs:
+        Debug:
+          VALIDATE_WORKSPACE: YES
+    sources:
+      - DomainTests
+    dependencies:
+      - target: Domain
+  # Presentation.frameworkのUnitTestターゲット
+  PresentationTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'Presentation.tests'
+      configs:
+        Debug:
+          VALIDATE_WORKSPACE: YES
+    sources:
+      - PresentationTests
+    dependencies:
+      - target: Presentation
+#####################
+  # UITestターゲット
+  PCSwiftUIUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'PCSwiftUI.uitests'
+    sources: PCSwiftUIUITests
+    dependencies:
+      - target: PCSwiftUI
+
+#####################
+
+# スキーム定義
+schemeTemplates:
+  PCSwiftUIScheme:
+    build:
+      targets:
+        PCSwiftUI: all
+        PCSwiftUIUITests: [test]
+    run:
+      config: ${debugConfig}
+    test:
+      config: ${debugConfig}
+      targets:
+        - PCSwiftUIUITests
+    profile:
+      config: ${releaseConfig}
+    analyze:
+      config: ${debugConfig}
+    archive:
+      config: ${releaseConfig}
+  DataStoreScheme:
+    build:
+      targets:
+        DataStore: all
+        DataStoreTests: [test]
+    run:
+      config: ${debugConfig}
+    test:
+      config: ${debugConfig}
+      gatherCoverageData: true
+      targets:
+        - DataStoreTests
+    profile:
+      config: ${releaseConfig}
+    analyze:
+      config: ${debugConfig}
+    archive:
+      config: ${releaseConfig}
+  DomainScheme:
+    build:
+      targets:
+        Domain: all
+        DomainTests: [test]
+    run:
+      config: ${debugConfig}
+    test:
+      config: ${debugConfig}
+      gatherCoverageData: true
+      targets:
+        - DomainTests
+    profile:
+      config: ${releaseConfig}
+    analyze:
+      config: ${debugConfig}
+    archive:
+      config: ${releaseConfig}
+  PresentationScheme:
+    build:
+      targets:
+        Presentation: all
+        PresentationTests: [test]
+    run:
+      config: ${debugConfig}
+    test:
+      config: ${debugConfig}
+      gatherCoverageData: true
+      targets:
+        - PresentationTests
+    profile:
+      config: ${releaseConfig}
+    analyze:
+      config: ${debugConfig}
+    archive:
+      config: ${releaseConfig}
+schemes:
+  PCSwiftUI:
+    templates: [PCSwiftUIScheme]
+    templateAttributes:
+      debugConfig: Debug
+      releaseConfig: Release
+  Data:
+    templates: [DataStoreScheme]
+    templateAttributes:
+      debugConfig: Debug
+      releaseConfig: Release
+  Domain:
+    templates: [DomainScheme]
+    templateAttributes:
+      debugConfig: Debug
+      releaseConfig: Release
+  Presentation:
+    templates: [PresentationScheme]
+    templateAttributes:
+      debugConfig: Debug
+      releaseConfig: Release

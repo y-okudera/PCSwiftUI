@@ -1,0 +1,32 @@
+//
+//  Debug.xcconfig
+//  PCSwiftUI
+//
+//  Created by Yuki Okudera on 2022/01/02.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+//:configuration = Debug
+ENABLE_PREVIEWS = YES
+DEVELOPMENT_ASSET_PATHS = "PCSwiftUI/Preview Content"
+TARGETED_DEVICE_FAMILY = 1,2
+IPHONEOS_DEPLOYMENT_TARGET = 14.0
+INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES
+INFOPLIST_KEY_UILaunchScreen_Generation = YES
+INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
+INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
+INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks
+SWIFT_EMIT_LOC_STRINGS = YES
+GENERATE_INFOPLIST_FILE = YES
+PRODUCT_BUNDLE_IDENTIFIER = jp.yuoku.PCSwiftUI
+PRODUCT_NAME = $(TARGET_NAME)
+CODE_SIGN_STYLE = Manual
+DEVELOPMENT_TEAM = B8PR34D6DP
+CURRENT_PROJECT_VERSION = 1
+MARKETING_VERSION = 1.0
+ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+SWIFT_VERSION = 5.0
