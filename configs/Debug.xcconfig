@@ -10,7 +10,7 @@
 
 //:configuration = Debug
 ENABLE_PREVIEWS = YES
-DEVELOPMENT_ASSET_PATHS = "PCSwiftUI/Preview Content"
+DEVELOPMENT_ASSET_PATHS = "PCSwiftUI/Resources/Preview Content"
 TARGETED_DEVICE_FAMILY = 1,2
 IPHONEOS_DEPLOYMENT_TARGET = 14.0
 INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES
