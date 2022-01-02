@@ -14,6 +14,7 @@ bootstrap: ## Install tools
 
 .PHONY: project
 project: ## Generate Xcode project and workspace
+	swift run -c release --package-path ./Tools/MainTools swiftgen
 	swift run -c release --package-path ./Tools/MainTools xcodegen
 
 .PHONY: open
