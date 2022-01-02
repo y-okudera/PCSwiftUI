@@ -44,7 +44,9 @@ targets:
       - target: Presentation
     postCompileScripts:
       - path: ./scripts/format.sh
-        name: swift-format
+        name: format
+      - path: ./scripts/lint.sh
+        name: lint
 ####################
   # DataStoreフレームワーク
   DataStore:
