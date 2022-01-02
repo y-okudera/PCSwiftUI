@@ -43,8 +43,8 @@ targets:
       - target: Domain
       - target: Presentation
     postCompileScripts:
-      - path: ./scripts/swiftlint.sh
-        name: SwiftLint
+      - path: ./scripts/format.sh
+        name: swift-format
 ####################
   # DataStoreフレームワーク
   DataStore:

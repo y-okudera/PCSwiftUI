@@ -10,10 +10,11 @@ xcode: ## Select latest version of Xcode
 bootstrap: ## Install tools
 	make clean
 	make build-cli-tools
+	make format-configuration
 
 .PHONY: project
 project: ## Generate Xcode project and workspace
-	swift run -c release --package-path ./Tools/SubTools xcodegen
+	swift run -c release --package-path ./Tools/MainTools xcodegen
 
 .PHONY: open
 open: ## Open Xcode workspace
@@ -28,13 +29,21 @@ clean: ## Clean generated files
 	rm -rf Carthage
 	rm -rf ./Tools/**/.build/*
 
+.PHONY: format-configuration
+format-configuration: ## Create default .swift-format file
+	swift run -c release --package-path ./Tools/MainTools swift-format --mode dump-configuration > .swift-format
+
+.PHONY: lint
+lint: ## Linting Swift code
+	swift run -c release --package-path ./Tools/MainTools swift-format -r ./PCSwiftUI ./DataStore ./Domain ./Presentation -m lint
+
 .PHONY: format
 format: ## Reformatting Swift code
-	mint run SwiftFormat swiftformat .
+	swift run -c release --package-path ./Tools/MainTools swift-format -r ./PCSwiftUI ./DataStore ./Domain ./Presentation -i
 
 .PHONY: build-cli-tools
 build-cli-tools: # Build CLI tools managed by SwiftPM
 	swift build -c release --package-path ./Tools/MainTools --product license-plist
 	swift build -c release --package-path ./Tools/MainTools --product swiftgen
-	swift build -c release --package-path ./Tools/MainTools --product swiftlint
-	swift build -c release --package-path ./Tools/SubTools --product xcodegen
+	swift build -c release --package-path ./Tools/MainTools --product swift-format
+	swift build -c release --package-path ./Tools/MainTools --product xcodegen

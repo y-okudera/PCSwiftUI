@@ -8,7 +8,8 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/mono0926/LicensePlist", .exact("3.16.0")),
     .package(url: "https://github.com/SwiftGen/SwiftGen", .exact("6.5.1")),
-    .package(url: "https://github.com/realm/SwiftLint", .exact("0.40.3")),
+    .package(url: "https://github.com/apple/swift-format", .exact("0.50500.0")),
+    .package(url: "https://github.com/yonaskolb/XcodeGen", .exact("2.25.0")),
   ],
   targets: [
     .target(name: "MainTools", path: ""),

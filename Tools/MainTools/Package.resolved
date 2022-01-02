@@ -2,21 +2,21 @@
   "object": {
     "pins": [
       {
+        "package": "AEXML",
+        "repositoryURL": "https://github.com/tadija/AEXML.git",
+        "state": {
+          "branch": null,
+          "revision": "38f7d00b23ecd891e1ee656fa6aeebd6ba04ecc3",
+          "version": "4.6.1"
+        }
+      },
+      {
         "package": "APIKit",
         "repositoryURL": "https://github.com/ishkawa/APIKit.git",
         "state": {
           "branch": null,
           "revision": "4e7f42d93afb787b0bc502171f9b5c12cf49d0ca",
           "version": "5.3.0"
-        }
-      },
-      {
-        "package": "Commandant",
-        "repositoryURL": "https://github.com/Carthage/Commandant.git",
-        "state": {
-          "branch": null,
-          "revision": "ab68611013dec67413628ac87c1f29e8427bc8e4",
-          "version": "0.17.0"
         }
       },
       {
@@ -29,12 +29,30 @@
         }
       },
       {
+        "package": "GraphViz",
+        "repositoryURL": "https://github.com/SwiftDocOrg/GraphViz.git",
+        "state": {
+          "branch": null,
+          "revision": "70bebcf4597b9ce33e19816d6bbd4ba9b7bdf038",
+          "version": "0.2.0"
+        }
+      },
+      {
         "package": "HeliumLogger",
         "repositoryURL": "https://github.com/Kitura/HeliumLogger.git",
         "state": {
           "branch": null,
           "revision": "55fd2f0b70793017acee853c53cfcf8da0bd8d8d",
           "version": "1.9.200"
+        }
+      },
+      {
+        "package": "JSONUtilities",
+        "repositoryURL": "https://github.com/yonaskolb/JSONUtilities.git",
+        "state": {
+          "branch": null,
+          "revision": "128d2ffc22467f69569ef8ff971683e2393191a0",
+          "version": "4.2.0"
         }
       },
       {
@@ -74,15 +92,6 @@
         }
       },
       {
-        "package": "Nimble",
-        "repositoryURL": "https://github.com/Quick/Nimble.git",
-        "state": {
-          "branch": null,
-          "revision": "7a46a5fc86cb917f69e3daf79fcb045283d8f008",
-          "version": "8.1.2"
-        }
-      },
-      {
         "package": "PackageConfig",
         "repositoryURL": "https://github.com/shibapm/PackageConfig.git",
         "state": {
@@ -101,12 +110,12 @@
         }
       },
       {
-        "package": "Quick",
-        "repositoryURL": "https://github.com/Quick/Quick.git",
+        "package": "Rainbow",
+        "repositoryURL": "https://github.com/onevcat/Rainbow.git",
         "state": {
           "branch": null,
-          "revision": "09b3becb37cb2163919a3842a4c5fa6ec7130792",
-          "version": "2.2.1"
+          "revision": "626c3d4b6b55354b4af3aa309f998fae9b31a3d9",
+          "version": "3.2.0"
         }
       },
       {
@@ -116,15 +125,6 @@
           "branch": null,
           "revision": "e1577acf2b6e90086d01a6d5e2b8efdaae033568",
           "version": "2.3.0"
-        }
-      },
-      {
-        "package": "SourceKitten",
-        "repositoryURL": "https://github.com/jpsim/SourceKitten.git",
-        "state": {
-          "branch": null,
-          "revision": "c0f960f72fa1e6151695074ffa696e4da6c45ce8",
-          "version": "0.30.1"
         }
       },
       {
@@ -164,6 +164,15 @@
         }
       },
       {
+        "package": "swift-format",
+        "repositoryURL": "https://github.com/apple/swift-format",
+        "state": {
+          "branch": null,
+          "revision": "f872223e16742fd97fabd319fbf4a939230cc796",
+          "version": "0.50500.0"
+        }
+      },
+      {
         "package": "HTMLEntities",
         "repositoryURL": "https://github.com/Kitura/swift-html-entities.git",
         "state": {
@@ -182,6 +191,24 @@
         }
       },
       {
+        "package": "SwiftSyntax",
+        "repositoryURL": "https://github.com/apple/swift-syntax",
+        "state": {
+          "branch": null,
+          "revision": "75e60475d9d8fd5bbc16a12e0eaa2cb01b0c322e",
+          "version": "0.50500.0"
+        }
+      },
+      {
+        "package": "SwiftCLI",
+        "repositoryURL": "https://github.com/jakeheis/SwiftCLI.git",
+        "state": {
+          "branch": null,
+          "revision": "2e949055d9797c1a6bddcda0e58dada16cc8e970",
+          "version": "6.0.3"
+        }
+      },
+      {
         "package": "SwiftGen",
         "repositoryURL": "https://github.com/SwiftGen/SwiftGen",
         "state": {
@@ -191,30 +218,30 @@
         }
       },
       {
-        "package": "SwiftLint",
-        "repositoryURL": "https://github.com/realm/SwiftLint",
+        "package": "Version",
+        "repositoryURL": "https://github.com/mxcl/Version",
         "state": {
           "branch": null,
-          "revision": "4f8b7a5f480aad922beab9b3c674023e211bd177",
-          "version": "0.40.3"
+          "revision": "1fe824b80d89201652e7eca7c9252269a1d85e25",
+          "version": "2.0.1"
         }
       },
       {
-        "package": "SwiftyTextTable",
-        "repositoryURL": "https://github.com/scottrhoyt/SwiftyTextTable.git",
+        "package": "XcodeGen",
+        "repositoryURL": "https://github.com/yonaskolb/XcodeGen",
         "state": {
           "branch": null,
-          "revision": "c6df6cf533d120716bff38f8ff9885e1ce2a4ac3",
-          "version": "0.9.0"
+          "revision": "c8b2a4ac8a495f984ce7a321afdba19a8e9d436d",
+          "version": "2.25.0"
         }
       },
       {
-        "package": "SWXMLHash",
-        "repositoryURL": "https://github.com/drmohundro/SWXMLHash.git",
+        "package": "XcodeProj",
+        "repositoryURL": "https://github.com/tuist/XcodeProj.git",
         "state": {
           "branch": null,
-          "revision": "9183170d20857753d4f331b0ca63f73c60764bf3",
-          "version": "5.0.2"
+          "revision": "c75c3acc25460195cfd203a04dde165395bf00e0",
+          "version": "8.7.1"
         }
       },
       {
