@@ -1,6 +1,6 @@
 xcassets:
   inputs:
-    - Presentation/Resources/Assets/Assets.xcassets
+    - PCSwiftUI/Resources/Assets/Assets.xcassets
   outputs:
     - templateName: swift5
-      output: Presentation/Resources/Assets/Generated/Assets.swift
+      output: PCSwiftUI/Resources/Assets/Generated/Assets.swift
