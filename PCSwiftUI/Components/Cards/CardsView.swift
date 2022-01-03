@@ -18,8 +18,7 @@ struct CardsView: View {
         ScrollView {
           Group {
             if viewStore.isLoading {
-              VStack {
-                Spacer()
+              VStack(alignment: .center) {
                 LottieView(
                   asset: "pikachu",
                   isAnimating: viewStore.binding(
@@ -28,7 +27,6 @@ struct CardsView: View {
                   )
                 )
                 .frame(width: 120, height: 120, alignment: .center)
-                Spacer()
               }
             } else {
               VStack {
