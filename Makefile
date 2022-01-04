@@ -31,8 +31,12 @@ clean: ## Clean generated files
 	rm -rf ./Tools/**/.build/*
 
 .PHONY: format-configuration
-format-configuration: ## Create default .swift-format file
-	swift run -c release --package-path ./Tools/MainTools swift-format --mode dump-configuration > .swift-format
+format-configuration: ## Create default .swift-format file if not exists.
+    ifneq ("$(wildcard .swift-format)","")
+		echo Exists .swift-format;
+    else
+		swift run -c release --package-path ./Tools/MainTools swift-format --mode dump-configuration > .swift-format;
+    endif
 
 .PHONY: lint
 lint: ## Linting Swift code
