@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B64F11F92785C9B4001C5AB0 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F11F82785C9B4001C5AB0 /* Assets.swift */; };
 		B66DCC292780A209007663D6 /* PCSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */; };
 		B66DCC2B2780A209007663D6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66DCC2A2780A209007663D6 /* ContentView.swift */; };
 		B66DCC2D2780A20B007663D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B66DCC2C2780A20B007663D6 /* Assets.xcassets */; };
@@ -34,6 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B64F11F82785C9B4001C5AB0 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		B64F11FB2785C9F2001C5AB0 /* Project.Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Base.xcconfig; sourceTree = "<group>"; };
+		B64F11FC2785CA20001C5AB0 /* Project.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Debug.xcconfig; sourceTree = "<group>"; };
+		B64F11FD2785CA6E001C5AB0 /* Project.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Release.xcconfig; sourceTree = "<group>"; };
 		B66DCC252780A209007663D6 /* PCSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCSwiftUIApp.swift; sourceTree = "<group>"; };
 		B66DCC2A2780A209007663D6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,9 +76,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B64F11F22785C93C001C5AB0 /* Flux */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Flux;
+			sourceTree = "<group>";
+		};
+		B64F11F32785C943001C5AB0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B64F11F42785C94F001C5AB0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B64F11F52785C9B4001C5AB0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B66DCC2E2780A20B007663D6 /* Preview Content */,
+				B64F11F62785C9B4001C5AB0 /* Assets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B64F11F62785C9B4001C5AB0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B66DCC2C2780A20B007663D6 /* Assets.xcassets */,
+				B64F11F72785C9B4001C5AB0 /* Generated */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		B64F11F72785C9B4001C5AB0 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				B64F11F82785C9B4001C5AB0 /* Assets.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		B64F11FA2785C9D0001C5AB0 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				B64F11FB2785C9F2001C5AB0 /* Project.Base.xcconfig */,
+				B64F11FC2785CA20001C5AB0 /* Project.Debug.xcconfig */,
+				B64F11FD2785CA6E001C5AB0 /* Project.Release.xcconfig */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
 		B66DCC1C2780A209007663D6 = {
 			isa = PBXGroup;
 			children = (
+				B64F11FA2785C9D0001C5AB0 /* Configs */,
 				B66DCC272780A209007663D6 /* PCSwiftUI */,
 				B66DCC382780A20C007663D6 /* PCSwiftUITests */,
 				B66DCC422780A20C007663D6 /* PCSwiftUIUITests */,
@@ -94,10 +157,12 @@
 		B66DCC272780A209007663D6 /* PCSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				B64F11F52785C9B4001C5AB0 /* Resources */,
+				B64F11F42785C94F001C5AB0 /* Views */,
+				B64F11F32785C943001C5AB0 /* Models */,
+				B64F11F22785C93C001C5AB0 /* Flux */,
 				B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */,
 				B66DCC2A2780A209007663D6 /* ContentView.swift */,
-				B66DCC2C2780A20B007663D6 /* Assets.xcassets */,
-				B66DCC2E2780A20B007663D6 /* Preview Content */,
 			);
 			path = PCSwiftUI;
 			sourceTree = "<group>";
@@ -259,6 +324,7 @@
 			files = (
 				B66DCC2B2780A209007663D6 /* ContentView.swift in Sources */,
 				B66DCC292780A209007663D6 /* PCSwiftUIApp.swift in Sources */,
+				B64F11F92785C9B4001C5AB0 /* Assets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +363,7 @@
 /* Begin XCBuildConfiguration section */
 		B66DCC472780A20C007663D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B64F11FC2785CA20001C5AB0 /* Project.Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -346,7 +413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -358,6 +425,7 @@
 		};
 		B66DCC482780A20C007663D6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B64F11FD2785CA6E001C5AB0 /* Project.Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -401,7 +469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -413,61 +481,15 @@
 		};
 		B66DCC4A2780A20C007663D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B64F11FC2785CA20001C5AB0 /* Project.Debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PCSwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = B8PR34D6DP;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.yuoku.PCSwiftUI;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		B66DCC4B2780A20C007663D6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B64F11FD2785CA6E001C5AB0 /* Project.Release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PCSwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = B8PR34D6DP;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.yuoku.PCSwiftUI;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

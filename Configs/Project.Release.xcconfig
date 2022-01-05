@@ -1,0 +1,13 @@
+//
+//  Project.Release.xcconfig
+//  PCSwiftUI
+//
+//  Created by Yuki Okudera on 2022/01/05.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Project.Base.xcconfig"
+
+//:configuration = Release
