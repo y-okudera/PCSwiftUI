@@ -10,15 +10,17 @@ import Combine
 
 final class RepositoryListActionCreator {
     private let dispatcher: RepositoryListDispatcher
-    private let apiService: APIRepository
+
+    @Injected(\.apiRepositoryProvider)
+    private var apiRepository: APIRepositoryProviding
+
     private let onAppearSubject = PassthroughSubject<Void, Never>()
     private let responseSubject = PassthroughSubject<SearchRepositoryResponse, Never>()
     private let errorSubject = PassthroughSubject<APIError, Never>()
     private var cancellables: [AnyCancellable] = []
 
-    init(dispatcher: RepositoryListDispatcher = .shared, apiService: APIRepository = APIRepositoryImpl()) {
+    init(dispatcher: RepositoryListDispatcher = .shared) {
         self.dispatcher = dispatcher
-        self.apiService = apiService
 
         bindData()
         bindActions()
@@ -27,8 +29,8 @@ final class RepositoryListActionCreator {
     func bindData() {
         let request = SearchRepositoryRequest(searchWords: "SwiftUI")
         let responsePublisher = onAppearSubject
-            .flatMap { [apiService] _ in
-                apiService.response(from: request)
+            .flatMap { [apiRepository] _ in
+                apiRepository.response(from: request)
                     .catch { [weak self] error -> Empty<SearchRepositoryResponse, Never> in
                         self?.errorSubject.send(error)
                         return .init()
@@ -73,4 +75,3 @@ final class RepositoryListActionCreator {
         onAppearSubject.send(())
     }
 }
-

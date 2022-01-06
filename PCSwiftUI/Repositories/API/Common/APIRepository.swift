@@ -10,11 +10,11 @@ import Foundation
 import Json
 import Request
 
-protocol APIRepository {
+protocol APIRepositoryProviding {
     func response<T: APIRequestable>(from apiRequest: T) -> AnyPublisher<T.Response, APIError>
 }
 
-final class APIRepositoryImpl: APIRepository {
+final class APIRepository: APIRepositoryProviding {
 
     private let baseURL: URL
     init(baseURL: URL = URL(string: "https://api.github.com")!) {
