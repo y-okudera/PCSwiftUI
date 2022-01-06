@@ -377,6 +377,7 @@
 				B66DCC212780A209007663D6 /* Sources */,
 				B66DCC222780A209007663D6 /* Frameworks */,
 				B66DCC232780A209007663D6 /* Resources */,
+				FCD2E0852786B1C4009F50EF /* swift-format */,
 			);
 			buildRules = (
 			);
@@ -498,6 +499,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FCD2E0852786B1C4009F50EF /* swift-format */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "swift-format";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/Tools/.build/release/swift-format -r $SRCROOT/PCSwiftUI -i || true\n$SRCROOT/Tools/.build/release/swift-format -r $SRCROOT/PCSwiftUI -m lint || true\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B66DCC212780A209007663D6 /* Sources */ = {
