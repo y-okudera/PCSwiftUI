@@ -16,11 +16,6 @@ protocol APIRepositoryProviding {
 
 final class APIRepository: APIRepositoryProviding {
 
-    private let baseURL: URL
-    init(baseURL: URL = URL(string: "https://api.github.com")!) {
-        self.baseURL = baseURL
-    }
-
     func response<T: APIRequestable>(from apiRequest: T) -> AnyPublisher<T.Response, APIError> {
         let decorder = JSONDecoder()
         decorder.keyDecodingStrategy = .convertFromSnakeCase
