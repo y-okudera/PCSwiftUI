@@ -12,7 +12,7 @@ struct RepositoryListRow: View {
   @State var repository: Repository
 
   var body: some View {
-    NavigationLink(destination: RepositoryDetailView(repository: repository)) {
+    NavigationLink(destination: RepositoryOwnerWebView(repository: repository)) {
       Text(repository.fullName)
     }
   }

@@ -1,5 +1,5 @@
 //
-//  RepositoryDetailView.swift
+//  RepositoryOwnerWebView.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/05.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RepositoryDetailView: View {
+struct RepositoryOwnerWebView: View {
   var repository: Repository
 
   var body: some View {
@@ -20,9 +20,9 @@ struct RepositoryDetailView: View {
 }
 
 #if DEBUG
-  struct RepositoryDetailView_Previews: PreviewProvider {
+  struct RepositoryOwnerWebView_Previews: PreviewProvider {
     static var previews: some View {
-      RepositoryDetailView(
+      RepositoryOwnerWebView(
         repository: Repository(
           id: 1,
           fullName: "foo",
