@@ -8,12 +8,12 @@
 import Foundation
 
 private struct APIRepositoryProviderKey: InjectionKey {
-    static var currentValue: APIRepositoryProviding = APIRepository()
+  static var currentValue: APIRepositoryProviding = APIRepository()
 }
 
 extension InjectedValues {
-    var apiRepositoryProvider: APIRepositoryProviding {
-        get { Self[APIRepositoryProviderKey.self] }
-        set { Self[APIRepositoryProviderKey.self] = newValue }
-    }
+  var apiRepositoryProvider: APIRepositoryProviding {
+    get { Self[APIRepositoryProviderKey.self] }
+    set { Self[APIRepositoryProviderKey.self] = newValue }
+  }
 }

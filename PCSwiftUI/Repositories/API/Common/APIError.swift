@@ -8,6 +8,6 @@
 import Foundation
 
 enum APIError: Error {
-    case responseError(Error)
-    case parseError(Error)
+  case responseError(Error)
+  case parseError(Error)
 }

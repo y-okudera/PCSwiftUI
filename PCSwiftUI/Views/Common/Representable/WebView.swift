@@ -10,64 +10,64 @@ import WebKit
 
 struct WebView: UIViewRepresentable {
 
-    var urlString: String
+  var urlString: String
 
-    class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
-        var parent: WebView
+  class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
+    var parent: WebView
 
-        init(_ parent: WebView) {
-            self.parent = parent
-        }
-
-        func webView(
-            _ webView: WKWebView,
-            createWebViewWith configuration: WKWebViewConfiguration,
-            for navigationAction: WKNavigationAction,
-            windowFeatures: WKWindowFeatures
-        ) -> WKWebView? {
-            if navigationAction.targetFrame == nil {
-                webView.load(navigationAction.request)
-            }
-            return nil
-        }
-
-        func webView(
-            _ webView: WKWebView,
-            decidePolicyFor navigationAction: WKNavigationAction,
-            decisionHandler: (WKNavigationActionPolicy) -> Void
-        ) {
-            guard let url = navigationAction.request.url else {
-                decisionHandler(WKNavigationActionPolicy.cancel)
-                return
-            }
-            if url.absoluteString.hasPrefix("https://itunes.apple.com/jp/app/apple-store/") && UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url)
-                decisionHandler(WKNavigationActionPolicy.cancel)
-            } else if url.absoluteString.hasPrefix("http://") || url.absoluteString.hasPrefix("https://") {
-                decisionHandler(WKNavigationActionPolicy.allow)
-            } else {
-                decisionHandler(WKNavigationActionPolicy.cancel)
-            }
-        }
+    init(_ parent: WebView) {
+      self.parent = parent
     }
 
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+    func webView(
+      _ webView: WKWebView,
+      createWebViewWith configuration: WKWebViewConfiguration,
+      for navigationAction: WKNavigationAction,
+      windowFeatures: WKWindowFeatures
+    ) -> WKWebView? {
+      if navigationAction.targetFrame == nil {
+        webView.load(navigationAction.request)
+      }
+      return nil
     }
 
-    func makeUIView(context: Context) -> WKWebView {
-        let webView = WKWebView()
-
-        return webView
+    func webView(
+      _ webView: WKWebView,
+      decidePolicyFor navigationAction: WKNavigationAction,
+      decisionHandler: (WKNavigationActionPolicy) -> Void
+    ) {
+      guard let url = navigationAction.request.url else {
+        decisionHandler(WKNavigationActionPolicy.cancel)
+        return
+      }
+      if url.absoluteString.hasPrefix("https://itunes.apple.com/jp/app/apple-store/") && UIApplication.shared.canOpenURL(url) {
+        UIApplication.shared.open(url)
+        decisionHandler(WKNavigationActionPolicy.cancel)
+      } else if url.absoluteString.hasPrefix("http://") || url.absoluteString.hasPrefix("https://") {
+        decisionHandler(WKNavigationActionPolicy.allow)
+      } else {
+        decisionHandler(WKNavigationActionPolicy.cancel)
+      }
     }
+  }
 
-    func updateUIView(_ webView: WKWebView, context: Context) {
-        webView.uiDelegate = context.coordinator
-        webView.navigationDelegate = context.coordinator
-        webView.allowsBackForwardNavigationGestures = true
+  func makeCoordinator() -> Coordinator {
+    Coordinator(self)
+  }
 
-        let url = URL(string: urlString)!
-        let request = URLRequest(url: url)
-        webView.load(request)
-    }
+  func makeUIView(context: Context) -> WKWebView {
+    let webView = WKWebView()
+
+    return webView
+  }
+
+  func updateUIView(_ webView: WKWebView, context: Context) {
+    webView.uiDelegate = context.coordinator
+    webView.navigationDelegate = context.coordinator
+    webView.allowsBackForwardNavigationGestures = true
+
+    let url = URL(string: urlString)!
+    let request = URLRequest(url: url)
+    webView.load(request)
+  }
 }

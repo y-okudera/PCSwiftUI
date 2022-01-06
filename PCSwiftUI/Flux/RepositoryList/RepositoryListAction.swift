@@ -8,8 +8,8 @@
 import Foundation
 
 enum RepositoryListAction {
-    case updateRepositories([Repository])
-    case updateErrorMessage(String)
-    case showError
-    case showIcon
+  case updateRepositories([Repository])
+  case updateErrorMessage(String)
+  case showError
+  case showIcon
 }

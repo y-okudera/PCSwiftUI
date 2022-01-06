@@ -9,25 +9,25 @@ import Foundation
 import Request
 
 struct SearchRepositoryRequest: APIRequestable {
-    typealias Response = SearchRepositoryResponse
+  typealias Response = SearchRepositoryResponse
 
-    private let searchWords: String
-    init(searchWords: String) {
-        self.searchWords = searchWords
-    }
+  private let searchWords: String
+  init(searchWords: String) {
+    self.searchWords = searchWords
+  }
 
-    var path: String {
-        return "/search/repositories"
-    }
+  var path: String {
+    return "/search/repositories"
+  }
 
-    var method: MethodType {
-        return .get
-    }
+  var method: MethodType {
+    return .get
+  }
 
-    var queryItems: [URLQueryItem]? {
-        return [
-            .init(name: "q", value: searchWords),
-            .init(name: "order", value: "desc")
-        ]
-    }
+  var queryItems: [URLQueryItem]? {
+    return [
+      .init(name: "q", value: searchWords),
+      .init(name: "order", value: "desc"),
+    ]
+  }
 }

@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct User: Decodable, Hashable, Identifiable {
-    var id: Int64
-    var login: String
-    var avatarUrl: URL
-    var htmlUrl: String
+  var id: Int64
+  var login: String
+  var avatarUrl: URL
+  var htmlUrl: String
 }
