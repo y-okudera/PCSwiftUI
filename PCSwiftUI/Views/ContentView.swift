@@ -16,7 +16,7 @@ struct ContentView: View {
   }
 
   var body: some View {
-    NavigationView {
+    SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchRepositories(searchWords: store.searchQuery) }) {
       List(store.repositories) { repository in
         RepositoryListRow(repository: repository)
       }
@@ -25,7 +25,7 @@ struct ContentView: View {
       }
       .navigationBarTitle(Text("Repositories"))
     }
-    .onAppear(perform: { self.actionCreator.onAppear() })
+    .edgesIgnoringSafeArea(.top)
   }
 }
 

@@ -6,7 +6,6 @@
 //
 
 import Combine
-import Foundation
 
 final class RepositoryListActionCreator {
   private let dispatcher: RepositoryListDispatcher
@@ -14,7 +13,7 @@ final class RepositoryListActionCreator {
   @Injected(\.apiRepositoryProvider)
   private var apiRepository: APIRepositoryProviding
 
-  private let onAppearSubject = PassthroughSubject<Void, Never>()
+  private let searchRepositoriesSubject = PassthroughSubject<String, Never>()
   private let responseSubject = PassthroughSubject<SearchRepositoryResponse, Never>()
   private let errorSubject = PassthroughSubject<APIError, Never>()
   private var cancellables: [AnyCancellable] = []
@@ -27,11 +26,11 @@ final class RepositoryListActionCreator {
   }
 
   func bindData() {
-    let request = SearchRepositoryRequest(searchWords: "SwiftUI")
+    // searchRepositoriesSubjectにstringが送られてきたらAPIリクエストする
     let responsePublisher =
-      onAppearSubject
-      .flatMap { [apiRepository] _ in
-        apiRepository.response(from: request)
+      searchRepositoriesSubject.share()
+      .flatMap { [apiRepository] term in
+        apiRepository.response(from: SearchRepositoryRequest(searchWords: term))
           .catch { [weak self] error -> Empty<SearchRepositoryResponse, Never> in
             self?.errorSubject.send(error)
             return .init()
@@ -54,6 +53,7 @@ final class RepositoryListActionCreator {
       .map { $0.items }
       .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateRepositories($0)) })
 
+    // errorSubjectにerrorが送られてきたら、エラーメッセージを更新
     let errorDataStream =
       errorSubject
       .map { error -> String in
@@ -64,6 +64,7 @@ final class RepositoryListActionCreator {
       }
       .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateErrorMessage($0)) })
 
+    // errorSubjectにerrorが送られてきたら、エラーメッセージを表示
     let errorStream =
       errorSubject
       .map { _ in }
@@ -76,7 +77,7 @@ final class RepositoryListActionCreator {
     ]
   }
 
-  func onAppear() {
-    onAppearSubject.send(())
+  func searchRepositories(searchWords: String) {
+    searchRepositoriesSubject.send(searchWords)
   }
 }

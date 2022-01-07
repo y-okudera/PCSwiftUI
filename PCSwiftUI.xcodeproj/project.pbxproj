@@ -23,6 +23,7 @@
 		B64F12242785FA52001C5AB0 /* Json in Frameworks */ = {isa = PBXBuildFile; productRef = B64F12232785FA52001C5AB0 /* Json */; };
 		B64F12262785FA52001C5AB0 /* Request in Frameworks */ = {isa = PBXBuildFile; productRef = B64F12252785FA52001C5AB0 /* Request */; };
 		B64F122A27860E7E001C5AB0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F122927860E7E001C5AB0 /* WebView.swift */; };
+		B6593A4227873C4F00592E77 /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6593A4127873C4F00592E77 /* SearchNavigation.swift */; };
 		B66DCC292780A209007663D6 /* PCSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */; };
 		B66DCC2B2780A209007663D6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66DCC2A2780A209007663D6 /* ContentView.swift */; };
 		B66DCC2D2780A20B007663D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B66DCC2C2780A20B007663D6 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		B64F12182785E9DE001C5AB0 /* RepositoryOwnerWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryOwnerWebView.swift; sourceTree = "<group>"; };
 		B64F12202785F553001C5AB0 /* APIRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestable.swift; sourceTree = "<group>"; };
 		B64F122927860E7E001C5AB0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		B6593A4127873C4F00592E77 /* SearchNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigation.swift; sourceTree = "<group>"; };
 		B66DCC252780A209007663D6 /* PCSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCSwiftUIApp.swift; sourceTree = "<group>"; };
 		B66DCC2A2780A209007663D6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		B64F11F42785C94F001C5AB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B6593A3B278728B700592E77 /* Components */,
 				B64F122727860E6A001C5AB0 /* Common */,
 				B66DCC2A2780A209007663D6 /* ContentView.swift */,
 				B64F121D2785EDE1001C5AB0 /* RepositoryList */,
@@ -262,6 +265,22 @@
 				B64F12182785E9DE001C5AB0 /* RepositoryOwnerWebView.swift */,
 			);
 			path = RepositoryOwner;
+			sourceTree = "<group>";
+		};
+		B6593A3B278728B700592E77 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B6593A3C278728E300592E77 /* SearchNavigation */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B6593A3C278728E300592E77 /* SearchNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				B6593A4127873C4F00592E77 /* SearchNavigation.swift */,
+			);
+			path = SearchNavigation;
 			sourceTree = "<group>";
 		};
 		B66DCC1C2780A209007663D6 = {
@@ -551,6 +570,7 @@
 				FC8C942C2786896F000E81AF /* Injected.swift in Sources */,
 				B64F122A27860E7E001C5AB0 /* WebView.swift in Sources */,
 				B64F12082785DAD3001C5AB0 /* RepositoryListStore.swift in Sources */,
+				B6593A4227873C4F00592E77 /* SearchNavigation.swift in Sources */,
 				B64F12152785E7E3001C5AB0 /* SearchRepositoryRequest.swift in Sources */,
 				B64F12212785F553001C5AB0 /* APIRequestable.swift in Sources */,
 				B64F12132785E798001C5AB0 /* APIError.swift in Sources */,

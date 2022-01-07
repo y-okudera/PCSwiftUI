@@ -11,5 +11,4 @@ enum RepositoryListAction {
   case updateRepositories([Repository])
   case updateErrorMessage(String)
   case showError
-  case showIcon
 }
