@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  RepositoryListView.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/01.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct RepositoryListView: View {
   @ObservedObject var store: RepositoryListStore = .shared
   private var actionCreator: RepositoryListActionCreator
 
@@ -29,8 +29,8 @@ struct ContentView: View {
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct RepositoryListView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    RepositoryListView()
   }
 }

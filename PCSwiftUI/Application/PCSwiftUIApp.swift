@@ -11,7 +11,7 @@ import SwiftUI
 struct PCSwiftUIApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      RepositoryListView()
     }
   }
 }
