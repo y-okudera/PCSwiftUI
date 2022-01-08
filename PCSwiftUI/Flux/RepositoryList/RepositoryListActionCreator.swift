@@ -34,8 +34,8 @@ final class RepositoryListActionCreator {
     // searchRepositoriesSubjectにstringが送られてきたらAPIリクエストする
     let responsePublisher =
       searchRepositoriesSubject.share()
-      .flatMap { [apiRepository] term in
-        apiRepository.response(from: SearchRepositoryRequest(searchWords: term, page: 1))
+      .flatMap { [apiRepository] searchQuery in
+        apiRepository.response(from: SearchRepositoryRequest(searchQuery: searchQuery, page: 1))
           .catch { [weak self] error -> Empty<APIResponse<SearchRepositoryResponse>, Never> in
             self?.errorSubject.send(APIError(error: error))
             return .init()
@@ -50,8 +50,8 @@ final class RepositoryListActionCreator {
     // additionalSearchRepositoriesSubjectに(string, int)が送られてきたら追加読み込みのAPIリクエストする
     let additionalResponsePublisher =
       additionalSearchRepositoriesSubject.share()
-      .flatMap { [apiRepository] term, page in
-        apiRepository.response(from: SearchRepositoryRequest(searchWords: term, page: page))
+      .flatMap { [apiRepository] searchQuery, page in
+        apiRepository.response(from: SearchRepositoryRequest(searchQuery: searchQuery, page: page))
           .catch { [weak self] error -> Empty<APIResponse<SearchRepositoryResponse>, Never> in
             self?.errorSubject.send(APIError(error: error))
             return .init()
@@ -101,11 +101,11 @@ final class RepositoryListActionCreator {
     ]
   }
 
-  func searchRepositories(searchWords: String) {
-    searchRepositoriesSubject.send(searchWords)
+  func searchRepositories(searchQuery: String) {
+    searchRepositoriesSubject.send(searchQuery)
   }
 
-  func additionalSearchRepositories(searchWords: String, page: Int) {
-    additionalSearchRepositoriesSubject.send((searchWords, page))
+  func additionalSearchRepositories(searchQuery: String, page: Int) {
+    additionalSearchRepositoriesSubject.send((searchQuery, page))
   }
 }

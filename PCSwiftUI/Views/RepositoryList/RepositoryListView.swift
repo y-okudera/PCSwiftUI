@@ -16,7 +16,7 @@ struct RepositoryListView: View {
   }
 
   var body: some View {
-    SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchRepositories(searchWords: store.searchQuery) }) {
+    SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchRepositories(searchQuery: store.searchQuery) }) {
       List {
         ForEach(store.repositoryListState.repositories) { repository in
           RepositoryListRow(repository: repository)
@@ -28,7 +28,7 @@ struct RepositoryListView: View {
             Spacer()
             ActivityIndicator()
               .onAppear {
-                actionCreator.additionalSearchRepositories(searchWords: store.searchQuery, page: store.page)
+                actionCreator.additionalSearchRepositories(searchQuery: store.searchQuery, page: store.page)
               }
             Spacer()
           }

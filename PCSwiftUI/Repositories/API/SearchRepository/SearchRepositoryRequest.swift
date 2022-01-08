@@ -11,11 +11,11 @@ import Request
 struct SearchRepositoryRequest: APIRequestable {
   typealias Response = SearchRepositoryResponse
 
-  private let searchWords: String
+  private let searchQuery: String
   private let page: Int
 
-  init(searchWords: String, page: Int = 1) {
-    self.searchWords = searchWords
+  init(searchQuery: String, page: Int = 1) {
+    self.searchQuery = searchQuery
     self.page = page
   }
 
@@ -29,7 +29,7 @@ struct SearchRepositoryRequest: APIRequestable {
 
   var queryItems: [URLQueryItem]? {
     return [
-      .init(name: "q", value: searchWords),
+      .init(name: "q", value: searchQuery),
       .init(name: "order", value: "desc"),
       .init(name: "per_page", value: "20"),
       .init(name: "page", value: page.description),
