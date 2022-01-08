@@ -14,6 +14,7 @@
 		B64AA5A527898594001D16BB /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA5A427898594001D16BB /* APIResponse.swift */; };
 		B64AA5AC2789BAB1001D16BB /* Error+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA5AB2789BAB1001D16BB /* Error+.swift */; };
 		B64AA5AE2789D318001D16BB /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA5AD2789D318001D16BB /* Array+.swift */; };
+		B64AA5B12789E5D3001D16BB /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA5B02789E5D3001D16BB /* ActivityIndicator.swift */; };
 		B64F12082785DAD3001C5AB0 /* RepositoryListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F12072785DAD3001C5AB0 /* RepositoryListStore.swift */; };
 		B64F120A2785DAEB001C5AB0 /* RepositoryListDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F12092785DAEA001C5AB0 /* RepositoryListDispatcher.swift */; };
 		B64F120C2785DB00001C5AB0 /* RepositoryListActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F120B2785DB00001C5AB0 /* RepositoryListActionCreator.swift */; };
@@ -66,6 +67,7 @@
 		B64AA5A427898594001D16BB /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		B64AA5AB2789BAB1001D16BB /* Error+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+.swift"; sourceTree = "<group>"; };
 		B64AA5AD2789D318001D16BB /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		B64AA5B02789E5D3001D16BB /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B64F11FB2785C9F2001C5AB0 /* Project.Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Base.xcconfig; sourceTree = "<group>"; };
 		B64F11FC2785CA20001C5AB0 /* Project.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Debug.xcconfig; sourceTree = "<group>"; };
 		B64F11FD2785CA6E001C5AB0 /* Project.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Release.xcconfig; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		B64AA5A327897D0D001D16BB /* UIViewRepresentable */ = {
 			isa = PBXGroup;
 			children = (
+				B64AA5AF2789E5A9001D16BB /* ActivityIndicator */,
 				B64AA5A127897C20001D16BB /* WebView */,
 			);
 			path = UIViewRepresentable;
@@ -163,6 +166,14 @@
 				B64AA5AB2789BAB1001D16BB /* Error+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		B64AA5AF2789E5A9001D16BB /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				B64AA5B02789E5D3001D16BB /* ActivityIndicator.swift */,
+			);
+			path = ActivityIndicator;
 			sourceTree = "<group>";
 		};
 		B64F11F22785C93C001C5AB0 /* Flux */ = {
@@ -601,6 +612,7 @@
 				FC8C94302786898F000E81AF /* InjectionKey.swift in Sources */,
 				B64F120C2785DB00001C5AB0 /* RepositoryListActionCreator.swift in Sources */,
 				B64F12192785E9DE001C5AB0 /* RepositoryOwnerWebView.swift in Sources */,
+				B64AA5B12789E5D3001D16BB /* ActivityIndicator.swift in Sources */,
 				B66DCC2B2780A209007663D6 /* RepositoryListView.swift in Sources */,
 				B64F12172785E9B5001C5AB0 /* RepositoryListRow.swift in Sources */,
 				FC8C942E27868980000E81AF /* InjectedValues.swift in Sources */,

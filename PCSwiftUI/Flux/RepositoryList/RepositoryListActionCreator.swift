@@ -14,10 +14,15 @@ final class RepositoryListActionCreator {
   @Injected(\.apiRepositoryProvider)
   private var apiRepository: APIRepositoryProviding
 
-  private let searchRepositoriesSubject = PassthroughSubject<String, Never>()
-  private let responseSubject = PassthroughSubject<SearchRepositoryResponse, Never>()
-  private let errorSubject = PassthroughSubject<APIError, Never>()
   private var cancellables: [AnyCancellable] = []
+
+  private let searchRepositoriesSubject = PassthroughSubject<String, Never>()
+  private let responseSubject = PassthroughSubject<APIResponse<SearchRepositoryResponse>, Never>()
+
+  private let additionalSearchRepositoriesSubject = PassthroughSubject<(String, Int), Never>()
+  private let additionalResponseSubject = PassthroughSubject<APIResponse<SearchRepositoryResponse>, Never>()
+
+  private let errorSubject = PassthroughSubject<APIError, Never>()
 
   init(dispatcher: RepositoryListDispatcher = .shared) {
     self.dispatcher = dispatcher
@@ -30,9 +35,8 @@ final class RepositoryListActionCreator {
     let responsePublisher =
       searchRepositoriesSubject.share()
       .flatMap { [apiRepository] term in
-        apiRepository.response(from: SearchRepositoryRequest(searchWords: term))
-          .map { $0.response }
-          .catch { [weak self] error -> Empty<SearchRepositoryResponse, Never> in
+        apiRepository.response(from: SearchRepositoryRequest(searchWords: term, page: 1))
+          .catch { [weak self] error -> Empty<APIResponse<SearchRepositoryResponse>, Never> in
             self?.errorSubject.send(APIError(error: error))
             return .init()
           }
@@ -43,8 +47,25 @@ final class RepositoryListActionCreator {
       .share()
       .subscribe(responseSubject)
 
+    // additionalSearchRepositoriesSubjectに(string, int)が送られてきたら追加読み込みのAPIリクエストする
+    let additionalResponsePublisher =
+      additionalSearchRepositoriesSubject.share()
+      .flatMap { [apiRepository] term, page in
+        apiRepository.response(from: SearchRepositoryRequest(searchWords: term, page: page))
+          .catch { [weak self] error -> Empty<APIResponse<SearchRepositoryResponse>, Never> in
+            self?.errorSubject.send(APIError(error: error))
+            return .init()
+          }
+      }
+
+    let additionalResponseStream =
+      additionalResponsePublisher
+      .share()
+      .subscribe(additionalResponseSubject)
+
     cancellables += [
-      responseStream
+      responseStream,
+      additionalResponseStream,
     ]
   }
 
@@ -52,6 +73,10 @@ final class RepositoryListActionCreator {
     let responseDataStream =
       responseSubject
       .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.initializeRepositoryListState($0)) })
+
+    let additionalResponseDataStream =
+      additionalResponseSubject
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateRepositoryListState($0)) })
 
     // errorSubjectにerrorが送られてきたら、エラーメッセージを更新
     let errorDataStream =
@@ -70,6 +95,7 @@ final class RepositoryListActionCreator {
 
     cancellables += [
       responseDataStream,
+      additionalResponseDataStream,
       errorDataStream,
       errorStream,
     ]
@@ -77,5 +103,9 @@ final class RepositoryListActionCreator {
 
   func searchRepositories(searchWords: String) {
     searchRepositoriesSubject.send(searchWords)
+  }
+
+  func additionalSearchRepositories(searchWords: String, page: Int) {
+    additionalSearchRepositoriesSubject.send((searchWords, page))
   }
 }
