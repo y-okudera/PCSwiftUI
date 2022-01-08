@@ -8,7 +8,7 @@
 import Foundation
 
 enum RepositoryListAction {
-  case updateRepositories([Repository])
+  case initializeRepositoryListState(SearchRepositoryResponse)
   case updateErrorMessage(String)
   case showError
 }

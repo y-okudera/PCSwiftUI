@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B64F11FF2785D6FF001C5AB0 /* SearchRepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F11FE2785D6FF001C5AB0 /* SearchRepositoryResponse.swift */; };
-		B64F12032785D716001C5AB0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F12022785D716001C5AB0 /* User.swift */; };
-		B64F12052785D71F001C5AB0 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F12042785D71F001C5AB0 /* Repository.swift */; };
+		B64AA59A2789393D001D16BB /* SearchRepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA5992789393D001D16BB /* SearchRepositoryResponse.swift */; };
+		B64AA59C27893B49001D16BB /* RepositoryListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA59B27893B49001D16BB /* RepositoryListState.swift */; };
+		B64AA59E278969E0001D16BB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA59D278969E0001D16BB /* Repository.swift */; };
+		B64AA5A027896A1C001D16BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA59F27896A1C001D16BB /* User.swift */; };
 		B64F12082785DAD3001C5AB0 /* RepositoryListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F12072785DAD3001C5AB0 /* RepositoryListStore.swift */; };
 		B64F120A2785DAEB001C5AB0 /* RepositoryListDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F12092785DAEA001C5AB0 /* RepositoryListDispatcher.swift */; };
 		B64F120C2785DB00001C5AB0 /* RepositoryListActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F120B2785DB00001C5AB0 /* RepositoryListActionCreator.swift */; };
@@ -55,12 +56,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B64AA5992789393D001D16BB /* SearchRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryResponse.swift; sourceTree = "<group>"; };
+		B64AA59B27893B49001D16BB /* RepositoryListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListState.swift; sourceTree = "<group>"; };
+		B64AA59D278969E0001D16BB /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		B64AA59F27896A1C001D16BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B64F11FB2785C9F2001C5AB0 /* Project.Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Base.xcconfig; sourceTree = "<group>"; };
 		B64F11FC2785CA20001C5AB0 /* Project.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Debug.xcconfig; sourceTree = "<group>"; };
 		B64F11FD2785CA6E001C5AB0 /* Project.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Release.xcconfig; sourceTree = "<group>"; };
-		B64F11FE2785D6FF001C5AB0 /* SearchRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryResponse.swift; sourceTree = "<group>"; };
-		B64F12022785D716001C5AB0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		B64F12042785D71F001C5AB0 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		B64F12072785DAD3001C5AB0 /* RepositoryListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListStore.swift; sourceTree = "<group>"; };
 		B64F12092785DAEA001C5AB0 /* RepositoryListDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListDispatcher.swift; sourceTree = "<group>"; };
 		B64F120B2785DB00001C5AB0 /* RepositoryListActionCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListActionCreator.swift; sourceTree = "<group>"; };
@@ -116,6 +118,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B64AA596278938A8001D16BB /* State */ = {
+			isa = PBXGroup;
+			children = (
+				B64F121E2785EE04001C5AB0 /* RepositoryList */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		B64AA5A127897C20001D16BB /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				B64F122927860E7E001C5AB0 /* WebView.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
+		B64AA5A227897CFC001D16BB /* UIViewControllerRepresentable */ = {
+			isa = PBXGroup;
+			children = (
+				B6593A3C278728E300592E77 /* SearchNavigation */,
+			);
+			path = UIViewControllerRepresentable;
+			sourceTree = "<group>";
+		};
+		B64AA5A327897D0D001D16BB /* UIViewRepresentable */ = {
+			isa = PBXGroup;
+			children = (
+				B64AA5A127897C20001D16BB /* WebView */,
+			);
+			path = UIViewRepresentable;
+			sourceTree = "<group>";
+		};
 		B64F11F22785C93C001C5AB0 /* Flux */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,7 +161,7 @@
 		B64F11F32785C943001C5AB0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B64F121E2785EE04001C5AB0 /* RepositoryList */,
+				B64AA596278938A8001D16BB /* State */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -135,7 +169,6 @@
 		B64F11F42785C94F001C5AB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B6593A3B278728B700592E77 /* Components */,
 				B64F122727860E6A001C5AB0 /* Common */,
 				B64F121D2785EDE1001C5AB0 /* RepositoryList */,
 				B6593A3A27871EA200592E77 /* RepositoryOwner */,
@@ -212,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				B64F12142785E7E3001C5AB0 /* SearchRepositoryRequest.swift */,
+				B64AA5992789393D001D16BB /* SearchRepositoryResponse.swift */,
 			);
 			path = SearchRepository;
 			sourceTree = "<group>";
@@ -228,9 +262,9 @@
 		B64F121E2785EE04001C5AB0 /* RepositoryList */ = {
 			isa = PBXGroup;
 			children = (
-				B64F12042785D71F001C5AB0 /* Repository.swift */,
-				B64F11FE2785D6FF001C5AB0 /* SearchRepositoryResponse.swift */,
-				B64F12022785D716001C5AB0 /* User.swift */,
+				B64AA59D278969E0001D16BB /* Repository.swift */,
+				B64AA59B27893B49001D16BB /* RepositoryListState.swift */,
+				B64AA59F27896A1C001D16BB /* User.swift */,
 			);
 			path = RepositoryList;
 			sourceTree = "<group>";
@@ -254,7 +288,8 @@
 		B64F122827860E74001C5AB0 /* Representable */ = {
 			isa = PBXGroup;
 			children = (
-				B64F122927860E7E001C5AB0 /* WebView.swift */,
+				B64AA5A327897D0D001D16BB /* UIViewRepresentable */,
+				B64AA5A227897CFC001D16BB /* UIViewControllerRepresentable */,
 			);
 			path = Representable;
 			sourceTree = "<group>";
@@ -265,14 +300,6 @@
 				B64F12182785E9DE001C5AB0 /* RepositoryOwnerWebView.swift */,
 			);
 			path = RepositoryOwner;
-			sourceTree = "<group>";
-		};
-		B6593A3B278728B700592E77 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				B6593A3C278728E300592E77 /* SearchNavigation */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		B6593A3C278728E300592E77 /* SearchNavigation */ = {
@@ -555,7 +582,6 @@
 			files = (
 				B64F120A2785DAEB001C5AB0 /* RepositoryListDispatcher.swift in Sources */,
 				FC8C94302786898F000E81AF /* InjectionKey.swift in Sources */,
-				B64F12052785D71F001C5AB0 /* Repository.swift in Sources */,
 				B64F120C2785DB00001C5AB0 /* RepositoryListActionCreator.swift in Sources */,
 				B64F12192785E9DE001C5AB0 /* RepositoryOwnerWebView.swift in Sources */,
 				B66DCC2B2780A209007663D6 /* RepositoryListView.swift in Sources */,
@@ -563,11 +589,13 @@
 				FC8C942E27868980000E81AF /* InjectedValues.swift in Sources */,
 				B64F120E2785DB18001C5AB0 /* RepositoryListAction.swift in Sources */,
 				B66DCC292780A209007663D6 /* PCSwiftUIApp.swift in Sources */,
-				B64F12032785D716001C5AB0 /* User.swift in Sources */,
-				B64F11FF2785D6FF001C5AB0 /* SearchRepositoryResponse.swift in Sources */,
+				B64AA59A2789393D001D16BB /* SearchRepositoryResponse.swift in Sources */,
+				B64AA5A027896A1C001D16BB /* User.swift in Sources */,
 				FC8C943627868A84000E81AF /* APIRepositoryProviderKey.swift in Sources */,
+				B64AA59C27893B49001D16BB /* RepositoryListState.swift in Sources */,
 				B64F12112785E76E001C5AB0 /* APIRepository.swift in Sources */,
 				FC8C942C2786896F000E81AF /* Injected.swift in Sources */,
+				B64AA59E278969E0001D16BB /* Repository.swift in Sources */,
 				B64F122A27860E7E001C5AB0 /* WebView.swift in Sources */,
 				B64F12082785DAD3001C5AB0 /* RepositoryListStore.swift in Sources */,
 				B6593A4227873C4F00592E77 /* SearchNavigation.swift in Sources */,

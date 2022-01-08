@@ -20,7 +20,6 @@ final class RepositoryListActionCreator {
 
   init(dispatcher: RepositoryListDispatcher = .shared) {
     self.dispatcher = dispatcher
-
     bindData()
     bindActions()
   }
@@ -50,8 +49,7 @@ final class RepositoryListActionCreator {
   func bindActions() {
     let responseDataStream =
       responseSubject
-      .map { $0.items }
-      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateRepositories($0)) })
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.initializeRepositoryListState($0)) })
 
     // errorSubjectにerrorが送られてきたら、エラーメッセージを更新
     let errorDataStream =

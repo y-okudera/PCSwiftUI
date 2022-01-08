@@ -17,7 +17,7 @@ struct RepositoryListView: View {
 
   var body: some View {
     SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchRepositories(searchWords: store.searchQuery) }) {
-      List(store.repositories) { repository in
+      List(store.repositoryListState.repositories) { repository in
         RepositoryListRow(repository: repository)
       }
       .alert(isPresented: $store.isErrorShown) { () -> Alert in
@@ -25,7 +25,7 @@ struct RepositoryListView: View {
       }
       .navigationBarTitle(Text("Repositories"))
     }
-    .edgesIgnoringSafeArea(.top)
+    .edgesIgnoringSafeArea([.top, .bottom])
   }
 }
 
