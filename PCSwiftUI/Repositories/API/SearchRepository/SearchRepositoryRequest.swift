@@ -12,8 +12,11 @@ struct SearchRepositoryRequest: APIRequestable {
   typealias Response = SearchRepositoryResponse
 
   private let searchWords: String
-  init(searchWords: String) {
+  private let page: Int
+
+  init(searchWords: String, page: Int = 1) {
     self.searchWords = searchWords
+    self.page = page
   }
 
   var path: String {
@@ -28,6 +31,8 @@ struct SearchRepositoryRequest: APIRequestable {
     return [
       .init(name: "q", value: searchWords),
       .init(name: "order", value: "desc"),
+      .init(name: "per_page", value: "20"),
+      .init(name: "page", value: page.description),
     ]
   }
 }

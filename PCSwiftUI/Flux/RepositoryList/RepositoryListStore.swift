@@ -12,6 +12,8 @@ final class RepositoryListStore: ObservableObject {
 
   /// 検索語
   @Published var searchQuery = ""
+  /// エラータイトル
+  @Published var errorTitle = ""
   /// エラーメッセージ
   @Published var errorMessage = ""
   /// エラーダイアログトリガー
@@ -26,7 +28,8 @@ final class RepositoryListStore: ObservableObject {
       switch action {
       case .initializeRepositoryListState(let response):
         self.repositoryListState = .init(response: response)
-      case .updateErrorMessage(let message):
+      case .updateErrorMessage(let title, let message):
+        self.errorTitle = title
         self.errorMessage = message
       case .showError:
         self.isErrorShown = true

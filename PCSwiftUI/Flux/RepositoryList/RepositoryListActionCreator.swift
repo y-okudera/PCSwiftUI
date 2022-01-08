@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 final class RepositoryListActionCreator {
   private let dispatcher: RepositoryListDispatcher
@@ -30,8 +31,9 @@ final class RepositoryListActionCreator {
       searchRepositoriesSubject.share()
       .flatMap { [apiRepository] term in
         apiRepository.response(from: SearchRepositoryRequest(searchWords: term))
+          .map { $0.response }
           .catch { [weak self] error -> Empty<SearchRepositoryResponse, Never> in
-            self?.errorSubject.send(error)
+            self?.errorSubject.send(APIError(error: error))
             return .init()
           }
       }
@@ -54,13 +56,11 @@ final class RepositoryListActionCreator {
     // errorSubjectにerrorが送られてきたら、エラーメッセージを更新
     let errorDataStream =
       errorSubject
-      .map { error -> String in
-        switch error {
-        case .responseError: return "network error"
-        case .parseError: return "parse error"
-        }
+      .map { error -> (String, String) in
+        let nsError = error as NSError
+        return (nsError.localizedDescription, (nsError.localizedRecoverySuggestion ?? "エラーが発生しました。"))
       }
-      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateErrorMessage($0)) })
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateErrorMessage($0.0, $0.1)) })
 
     // errorSubjectにerrorが送られてきたら、エラーメッセージを表示
     let errorStream =
