@@ -22,17 +22,17 @@ struct RepositoryListView: View {
           RepositoryListRow(repository: repository)
         }
 
-        // リポジトリの検索結果が0件ではなく、次のページがある場合、リスト末尾にインジケーターを表示
-        if !store.repositoryListState.repositories.isEmpty && store.hasNext {
-          HStack {
-            Spacer()
-            ActivityIndicator()
-              .onAppear {
-                actionCreator.additionalSearchRepositories(searchQuery: store.searchQuery, page: store.page)
-              }
-            Spacer()
-          }
+        HStack {
+          Spacer()
+          ActivityIndicator()
+            .onAppear {
+              actionCreator.additionalSearchRepositories(searchQuery: store.searchQuery, page: store.page)
+            }
+          Spacer()
         }
+        // リポジトリの検索結果が0件ではなく、次のページがある場合、リスト末尾にインジケーターを表示
+        .hidden(store.repositoryListState.repositories.isEmpty || !store.hasNext)
+
       }
       .alert(isPresented: $store.isErrorShown) { () -> Alert in
         Alert(title: Text(store.errorTitle), message: Text(store.errorMessage))
