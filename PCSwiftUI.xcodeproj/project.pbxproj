@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B62F6D85278B2B4000FACD4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F6D84278B2B4000FACD4C /* AppDelegate.swift */; };
 		B64AA59A2789393D001D16BB /* SearchRepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA5992789393D001D16BB /* SearchRepositoryResponse.swift */; };
 		B64AA59C27893B49001D16BB /* RepositoryListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA59B27893B49001D16BB /* RepositoryListState.swift */; };
 		B64AA59E278969E0001D16BB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA59D278969E0001D16BB /* Repository.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B62F6D84278B2B4000FACD4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B64AA5992789393D001D16BB /* SearchRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryResponse.swift; sourceTree = "<group>"; };
 		B64AA59B27893B49001D16BB /* RepositoryListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListState.swift; sourceTree = "<group>"; };
 		B64AA59D278969E0001D16BB /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 		B64F121F2785EF45001C5AB0 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				B62F6D84278B2B4000FACD4C /* AppDelegate.swift */,
 				B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */,
 			);
 			path = Application;
@@ -623,6 +626,7 @@
 				FC8C94302786898F000E81AF /* InjectionKey.swift in Sources */,
 				B64F120C2785DB00001C5AB0 /* RepositoryListActionCreator.swift in Sources */,
 				B64F12192785E9DE001C5AB0 /* RepositoryOwnerWebView.swift in Sources */,
+				B62F6D85278B2B4000FACD4C /* AppDelegate.swift in Sources */,
 				B652F2F6278A8B0600F38D11 /* View+.swift in Sources */,
 				B64AA5B12789E5D3001D16BB /* ActivityIndicator.swift in Sources */,
 				B66DCC2B2780A209007663D6 /* RepositoryListView.swift in Sources */,

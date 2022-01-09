@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct PCSwiftUIApp: App {
+  // AppDelegateを参照
+  @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
   var body: some Scene {
     WindowGroup {
       RepositoryListView()
