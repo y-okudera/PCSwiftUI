@@ -24,9 +24,30 @@ enum APIError: Error {
   init(error: Error) {
     if let apiError = error as? APIError {
       self = apiError
-    } else {
-      self = .unknown(error)
+      return
     }
+
+    if let urlError = error as? URLError {
+      switch urlError.code {
+      case .timedOut,
+        .cannotFindHost,
+        .cannotConnectToHost,
+        .networkConnectionLost,
+        .dnsLookupFailed,
+        .httpTooManyRedirects,
+        .resourceUnavailable,
+        .notConnectedToInternet,
+        .secureConnectionFailed,
+        .cannotLoadFromNetwork:
+        self = APIError.cannotConnected
+      default:
+        self = APIError.unknown(error)
+      }
+      return
+    }
+
+    // errorがAPIErrorでもURLErrorでもない場合
+    self = APIError(error: error)
   }
 }
 

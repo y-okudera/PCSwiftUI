@@ -14,13 +14,13 @@ protocol APIRepositoryProviding {
   func response<T: APIRequestable>(from apiRequest: T) -> AnyPublisher<APIResponse<T.Response>, Error>
 }
 
-final class APIRepository: APIRepositoryProviding {
+struct APIRepository: APIRepositoryProviding {
 
   func response<T: APIRequestable>(from apiRequest: T) -> AnyPublisher<APIResponse<T.Response>, Error> {
     Request {
       Url(apiRequest.baseUrl + apiRequest.path)
       Header.Accept(.json)
-      Timeout(5, for: .request)
+      Timeout(30, for: .request)
       Timeout(30, for: .resource)
 
       if let queryItems = apiRequest.queryItems {
@@ -53,26 +53,7 @@ final class APIRepository: APIRepositoryProviding {
         throw APIError.invalidResponse(URLError(.badServerResponse))
       }
     }
-    .mapError {
-      guard let urlError = $0 as? URLError else {
-        return APIError(error: $0)
-      }
-      switch urlError.code {
-      case .timedOut,
-        .cannotFindHost,
-        .cannotConnectToHost,
-        .networkConnectionLost,
-        .dnsLookupFailed,
-        .httpTooManyRedirects,
-        .resourceUnavailable,
-        .notConnectedToInternet,
-        .secureConnectionFailed,
-        .cannotLoadFromNetwork:
-        return APIError.cannotConnected
-      default:
-        return APIError.unknown($0)
-      }
-    }
+    .mapError { APIError(error: $0) }
     .receive(on: RunLoop.main)
     .eraseToAnyPublisher()
   }
