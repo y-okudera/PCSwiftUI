@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B62F6D85278B2B4000FACD4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F6D84278B2B4000FACD4C /* AppDelegate.swift */; };
+		B62F6D89278B3FF700FACD4C /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F6D88278B3FF700FACD4C /* RootView.swift */; };
+		B62F6D8B278B519E00FACD4C /* ScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F6D8A278B519E00FACD4C /* ScreenCoordinator.swift */; };
+		B62F6D8D278B51BB00FACD4C /* Deeplink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F6D8C278B51BB00FACD4C /* Deeplink.swift */; };
 		B64AA59A2789393D001D16BB /* SearchRepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA5992789393D001D16BB /* SearchRepositoryResponse.swift */; };
 		B64AA59C27893B49001D16BB /* RepositoryListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA59B27893B49001D16BB /* RepositoryListState.swift */; };
 		B64AA59E278969E0001D16BB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA59D278969E0001D16BB /* Repository.swift */; };
@@ -63,6 +66,10 @@
 
 /* Begin PBXFileReference section */
 		B62F6D84278B2B4000FACD4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B62F6D86278B39BD00FACD4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B62F6D88278B3FF700FACD4C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		B62F6D8A278B519E00FACD4C /* ScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCoordinator.swift; sourceTree = "<group>"; };
+		B62F6D8C278B51BB00FACD4C /* Deeplink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deeplink.swift; sourceTree = "<group>"; };
 		B64AA5992789393D001D16BB /* SearchRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryResponse.swift; sourceTree = "<group>"; };
 		B64AA59B27893B49001D16BB /* RepositoryListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListState.swift; sourceTree = "<group>"; };
 		B64AA59D278969E0001D16BB /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -130,6 +137,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B62F6D87278B3FE400FACD4C /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				B62F6D8E278B54BD00FACD4C /* Deeplink */,
+				B62F6D88278B3FF700FACD4C /* RootView.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		B62F6D8E278B54BD00FACD4C /* Deeplink */ = {
+			isa = PBXGroup;
+			children = (
+				B62F6D8C278B51BB00FACD4C /* Deeplink.swift */,
+			);
+			path = Deeplink;
+			sourceTree = "<group>";
+		};
 		B64AA596278938A8001D16BB /* State */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +226,7 @@
 				B64F122727860E6A001C5AB0 /* Common */,
 				B64F121D2785EDE1001C5AB0 /* RepositoryList */,
 				B6593A3A27871EA200592E77 /* RepositoryOwner */,
+				B62F6D87278B3FE400FACD4C /* Root */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,7 +330,9 @@
 			isa = PBXGroup;
 			children = (
 				B62F6D84278B2B4000FACD4C /* AppDelegate.swift */,
+				B62F6D86278B39BD00FACD4C /* Info.plist */,
 				B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */,
+				B62F6D8A278B519E00FACD4C /* ScreenCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -628,6 +655,7 @@
 				B64F12192785E9DE001C5AB0 /* RepositoryOwnerWebView.swift in Sources */,
 				B62F6D85278B2B4000FACD4C /* AppDelegate.swift in Sources */,
 				B652F2F6278A8B0600F38D11 /* View+.swift in Sources */,
+				B62F6D89278B3FF700FACD4C /* RootView.swift in Sources */,
 				B64AA5B12789E5D3001D16BB /* ActivityIndicator.swift in Sources */,
 				B66DCC2B2780A209007663D6 /* RepositoryListView.swift in Sources */,
 				B64F12172785E9B5001C5AB0 /* RepositoryListRow.swift in Sources */,
@@ -637,6 +665,7 @@
 				B66DCC292780A209007663D6 /* PCSwiftUIApp.swift in Sources */,
 				B64AA59A2789393D001D16BB /* SearchRepositoryResponse.swift in Sources */,
 				B64AA5A027896A1C001D16BB /* User.swift in Sources */,
+				B62F6D8D278B51BB00FACD4C /* Deeplink.swift in Sources */,
 				FC8C943627868A84000E81AF /* APIRepositoryProviderKey.swift in Sources */,
 				B64AA59C27893B49001D16BB /* RepositoryListState.swift in Sources */,
 				B64F12112785E76E001C5AB0 /* APIRepository.swift in Sources */,
@@ -647,6 +676,7 @@
 				B6593A4227873C4F00592E77 /* SearchNavigation.swift in Sources */,
 				B64AA5AC2789BAB1001D16BB /* Error+.swift in Sources */,
 				B64F12152785E7E3001C5AB0 /* SearchRepositoryRequest.swift in Sources */,
+				B62F6D8B278B519E00FACD4C /* ScreenCoordinator.swift in Sources */,
 				B64F12212785F553001C5AB0 /* APIRequestable.swift in Sources */,
 				B64F12132785E798001C5AB0 /* APIError.swift in Sources */,
 				B64AA5AE2789D318001D16BB /* Array+.swift in Sources */,

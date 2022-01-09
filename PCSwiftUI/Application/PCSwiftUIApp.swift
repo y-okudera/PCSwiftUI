@@ -14,7 +14,8 @@ struct PCSwiftUIApp: App {
 
   var body: some Scene {
     WindowGroup {
-      RepositoryListView()
+      RootView()
+        .environmentObject(ScreenCoordinator())
     }
   }
 }
