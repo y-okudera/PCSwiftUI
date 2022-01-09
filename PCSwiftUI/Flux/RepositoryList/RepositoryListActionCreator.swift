@@ -70,6 +70,7 @@ final class RepositoryListActionCreator {
   }
 
   func bindActions() {
+    // リポジトリ検索結果を反映
     let responseDataStream =
       responseSubject
       .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.initializeRepositoryListState($0)) })
