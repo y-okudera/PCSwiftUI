@@ -21,7 +21,6 @@ struct RepositoryListView: View {
         ForEach(store.repositoryListState.repositories) { repository in
           RepositoryListRow(repository: repository)
         }
-
         HStack {
           Spacer()
           ActivityIndicator()
@@ -30,9 +29,8 @@ struct RepositoryListView: View {
             }
           Spacer()
         }
-        // リポジトリの検索結果が0件ではなく、次のページがある場合、リスト末尾にインジケーターを表示
-        .hidden(store.repositoryListState.repositories.isEmpty || !store.hasNext)
-
+        // 次のページがない場合、リスト末尾にインジケーターを表示しない
+        .hidden(!store.hasNext)
       }
       .alert(isPresented: $store.isErrorShown) { () -> Alert in
         Alert(title: Text(store.errorTitle), message: Text(store.errorMessage))

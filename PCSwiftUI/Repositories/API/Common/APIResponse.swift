@@ -20,26 +20,21 @@ struct APIResponse<T: Decodable> {
     self.statusCode = httpURLResponse.statusCode
     self.responseHeaderFields = httpURLResponse.allHeaderFields
     self.gitHubAPIPagination = .init(httpURLResponse: httpURLResponse)
-    print("URL \(httpURLResponse.url?.absoluteString ?? "")")
-    print("gitHubAPIPagination \(gitHubAPIPagination.debugDescription)")
+    print("Requested URL \(httpURLResponse.url?.absoluteString ?? "nil")")
   }
 }
 
 // MARK: GitHub API Pagination
 struct GitHubAPIPagination {
-  let nextUrl: URL?
-  let firstUrl: URL?
-  let lastUrl: URL?
+  let hasNext: Bool
 
-  init(nextUrl: URL?, firstUrl: URL?, lastUrl: URL?) {
-    self.nextUrl = nextUrl
-    self.firstUrl = firstUrl
-    self.lastUrl = lastUrl
+  init(hasNext: Bool) {
+    self.hasNext = hasNext
   }
 
   init(httpURLResponse: HTTPURLResponse) {
     guard let linkField = httpURLResponse.allHeaderFields["Link"] as? String else {
-      self = .init(nextUrl: nil, firstUrl: nil, lastUrl: nil)
+      self = .init(hasNext: false)
       return
     }
 
@@ -61,20 +56,24 @@ struct GitHubAPIPagination {
       return URL(string: next)
     }()
 
-    let firstUrl: URL? = {
-      guard let first = dictionary["rel=\"first\""] else {
-        return nil
-      }
-      return URL(string: first)
-    }()
+    #if DEBUG
+      let firstUrl: URL? = {
+        guard let first = dictionary["rel=\"first\""] else {
+          return nil
+        }
+        return URL(string: first)
+      }()
+      let lastUrl: URL? = {
+        guard let last = dictionary["rel=\"last\""] else {
+          return nil
+        }
+        return URL(string: last)
+      }()
+      print("nextUrl", nextUrl?.absoluteString ?? "nil")
+      print("firstUrl", firstUrl?.absoluteString ?? "nil")
+      print("lastUrl", lastUrl?.absoluteString ?? "nil")
+    #endif
 
-    let lastUrl: URL? = {
-      guard let last = dictionary["rel=\"last\""] else {
-        return nil
-      }
-      return URL(string: last)
-    }()
-
-    self = .init(nextUrl: nextUrl, firstUrl: firstUrl, lastUrl: lastUrl)
+    self = .init(hasNext: nextUrl != nil)
   }
 }

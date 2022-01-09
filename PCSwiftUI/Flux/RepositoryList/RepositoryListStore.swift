@@ -23,7 +23,9 @@ final class RepositoryListStore: ObservableObject {
   /// ページ
   @Published private(set) var page = 1
   /// 次のページがあるか
-  @Published private(set) var hasNext = true
+  ///
+  /// - Note: 初期状態は検索未実施のためfalse
+  @Published private(set) var hasNext = false
 
   init(dispatcher: RepositoryListDispatcher = .shared) {
     dispatcher.register { [weak self] action in
@@ -33,11 +35,11 @@ final class RepositoryListStore: ObservableObject {
       case .initializeRepositoryListState(let apiResponse):
         self.repositoryListState = .init(response: apiResponse.response)
         self.page += 1
-        self.hasNext = apiResponse.gitHubAPIPagination?.nextUrl != nil
+        self.hasNext = apiResponse.gitHubAPIPagination?.hasNext ?? false
       case .updateRepositoryListState(let apiResponse):
         self.repositoryListState.append(response: apiResponse.response)
         self.page += 1
-        self.hasNext = apiResponse.gitHubAPIPagination?.nextUrl != nil
+        self.hasNext = apiResponse.gitHubAPIPagination?.hasNext ?? false
       case .updateErrorMessage(let title, let message):
         self.errorTitle = title
         self.errorMessage = message
