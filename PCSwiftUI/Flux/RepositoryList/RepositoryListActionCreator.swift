@@ -74,6 +74,20 @@ final class RepositoryListActionCreator {
       responseSubject
       .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.initializeRepositoryListState($0)) })
 
+    // 検索結果が0件の場合、エラーメッセージを更新
+    let emptyDataStream =
+      responseSubject
+      .filter { $0.response.items.isEmpty }
+      .map { _ in ("検索結果", "該当するリポジトリがありません。") }
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateErrorMessage($0.0, $0.1)) })
+
+    // 検索結果が0件の場合、エラーメッセージを表示
+    let isEmptyErrorStream =
+      responseSubject
+      .filter { $0.response.items.isEmpty }
+      .map { _ in }
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.showError) })
+
     let additionalResponseDataStream =
       additionalResponseSubject
       .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateRepositoryListState($0)) })
@@ -95,6 +109,8 @@ final class RepositoryListActionCreator {
 
     cancellables += [
       responseDataStream,
+      emptyDataStream,
+      isEmptyErrorStream,
       additionalResponseDataStream,
       errorDataStream,
       errorStream,
