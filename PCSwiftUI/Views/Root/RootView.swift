@@ -36,6 +36,16 @@ struct RootView: View {
         print("Deeplink .tab index=\(index)")
         // タブを選択
         screenCoordinator.selectedTabItem = index
+      case .user(let urlString):
+        print("Deeplink .user urlString=\(urlString)")
+        // Searchタブを選択
+        screenCoordinator.selectedTabItem = 0
+        // Push遷移していた場合にPopする
+        screenCoordinator.selectedUserPageUrl = ScreenCoordinator.Selection(isSelected: false, item: nil)
+        // 遷移アニメーションが見えるようにするためdelayをかける
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750)) {
+          screenCoordinator.selectedUserPageUrl = ScreenCoordinator.Selection(isSelected: true, item: urlString)
+        }
       case .none:
         print("Deeplink none.")
       }

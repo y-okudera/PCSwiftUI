@@ -7,8 +7,15 @@
 
 import Foundation
 
+/// Definition of deep links
+///
+/// - Note: <BR>
+/// e.g. `pcswiftui://tab?index=1`
+///
+/// e.g. `pcswiftui://user?url=https://github.com/octocat`
 enum Deeplink {
   case tab(index: Int)
+  case user(urlString: String)
 
   init?(url: URL) {
     guard url.scheme == "pcswiftui",
@@ -24,6 +31,11 @@ enum Deeplink {
         let index = Int(indexString)
       {
         self = .tab(index: index)
+        return
+      }
+    case "user":
+      if let urlString = queryUrlComponents.queryItems?.first(where: { $0.name == "url" })?.value {
+        self = .user(urlString: urlString)
         return
       }
     default:

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct RepositoryOwnerWebView: View {
-  var htmlUrl: URL
+  var urlString: String?
 
   var body: some View {
-    WebView(urlString: htmlUrl.absoluteString)
+    WebView(urlString: urlString ?? "")
   }
 }
 
@@ -19,7 +19,7 @@ struct RepositoryOwnerWebView: View {
   struct RepositoryOwnerWebView_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        RepositoryOwnerWebView(htmlUrl: Repository.mock.owner.htmlUrl)
+        RepositoryOwnerWebView(urlString: Repository.mock.owner.htmlUrl.absoluteString)
           .preferredColorScheme($0)
       }
     }

@@ -15,21 +15,11 @@ struct RepositoryListRow: View {
 
   var body: some View {
     Button {
-      screenCoordinator.selectedPushedItem = .repositoryOwnerWebView(url: repository.owner.htmlUrl)
+      screenCoordinator.selectedUserPageUrl = ScreenCoordinator.Selection(isSelected: true, item: repository.owner.htmlUrl.absoluteString)
     } label: {
       Text(repository.fullName)
         .foregroundColor(colorScheme == .light ? .black : .white)
     }
-    .background(
-      NavigationLink(
-        destination: RepositoryOwnerWebView(htmlUrl: repository.owner.htmlUrl),
-        tag: ScreenCoordinator.PushedItem.repositoryOwnerWebView(url: repository.owner.htmlUrl),
-        selection: $screenCoordinator.selectedPushedItem,
-        label: {
-          EmptyView()
-        }
-      )
-    )
   }
 }
 

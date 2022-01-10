@@ -9,12 +9,12 @@ import SwiftUI
 
 final class ScreenCoordinator: ObservableObject {
   @Published var selectedTabItem = 0
-  @Published var selectedPushedItem: PushedItem?
+  @Published var selectedUserPageUrl = Selection<String>(isSelected: false, item: nil)
 }
 
 extension ScreenCoordinator {
-  enum PushedItem: Hashable {
-    case repositoryOwnerWebView(url: URL)
+  struct Selection<T> {
+    var isSelected = false
+    var item: T?
   }
-
 }

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct RepositoryListView: View {
+  @Environment(\.colorScheme) private var colorScheme
+  @EnvironmentObject private var screenCoordinator: ScreenCoordinator
+
   @ObservedObject var store: RepositoryListStore = .shared
   private var actionCreator: RepositoryListActionCreator
 
@@ -32,6 +35,13 @@ struct RepositoryListView: View {
         // 次のページがない場合、リスト末尾にインジケーターを表示しない
         .hidden(!store.hasNext)
       }
+      .background(
+        NavigationLink(
+          destination: RepositoryOwnerWebView(urlString: screenCoordinator.selectedUserPageUrl.item),
+          isActive: $screenCoordinator.selectedUserPageUrl.isSelected,
+          label: { EmptyView() }
+        )
+      )
       .alert(isPresented: $store.isErrorShown) { () -> Alert in
         Alert(title: Text(store.errorTitle), message: Text(store.errorMessage))
       }
@@ -46,6 +56,7 @@ struct RepositoryListView: View {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
         RepositoryListView()
+          .environmentObject(ScreenCoordinator())
           .preferredColorScheme($0)
       }
     }
