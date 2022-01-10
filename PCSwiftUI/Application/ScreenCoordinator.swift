@@ -8,5 +8,13 @@
 import SwiftUI
 
 final class ScreenCoordinator: ObservableObject {
-  @Published var selectedTab = 0
+  @Published var selectedTabItem = 0
+  @Published var selectedPushedItem: PushedItem?
+}
+
+extension ScreenCoordinator {
+  enum PushedItem: Hashable {
+    case repositoryOwnerWebView(url: URL)
+  }
+
 }

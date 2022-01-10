@@ -8,13 +8,28 @@
 import SwiftUI
 
 struct RepositoryListRow: View {
+  @Environment(\.colorScheme) private var colorScheme
+  @EnvironmentObject private var screenCoordinator: ScreenCoordinator
 
   @State var repository: Repository
 
   var body: some View {
-    NavigationLink(destination: RepositoryOwnerWebView(repository: repository)) {
+    Button {
+      screenCoordinator.selectedPushedItem = .repositoryOwnerWebView(url: repository.owner.htmlUrl)
+    } label: {
       Text(repository.fullName)
+        .foregroundColor(colorScheme == .light ? .black : .white)
     }
+    .background(
+      NavigationLink(
+        destination: RepositoryOwnerWebView(htmlUrl: repository.owner.htmlUrl),
+        tag: ScreenCoordinator.PushedItem.repositoryOwnerWebView(url: repository.owner.htmlUrl),
+        selection: $screenCoordinator.selectedPushedItem,
+        label: {
+          EmptyView()
+        }
+      )
+    )
   }
 }
 

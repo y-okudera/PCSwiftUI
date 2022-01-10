@@ -12,7 +12,7 @@ struct RootView: View {
   @EnvironmentObject private var screenCoordinator: ScreenCoordinator
 
   var body: some View {
-    TabView(selection: $screenCoordinator.selectedTab) {
+    TabView(selection: $screenCoordinator.selectedTabItem) {
       RepositoryListView()
         .tabItem {
           VStack {
@@ -35,7 +35,7 @@ struct RootView: View {
       case .tab(let index):
         print("Deeplink .tab index=\(index)")
         // タブを選択
-        screenCoordinator.selectedTab = index
+        screenCoordinator.selectedTabItem = index
       case .none:
         print("Deeplink none.")
       }
