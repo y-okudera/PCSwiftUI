@@ -640,7 +640,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/Tools/.build/release/swift-format -r $SRCROOT/PCSwiftUI -i || true\n$SRCROOT/Tools/.build/release/swift-format -r $SRCROOT/PCSwiftUI -m lint || true\n";
+			shellScript = "if [ $ENABLE_PREVIEWS == \"NO\" ]\nthen\n  $SRCROOT/Tools/.build/release/swift-format -r $SRCROOT/PCSwiftUI -i || true\n  $SRCROOT/Tools/.build/release/swift-format -r $SRCROOT/PCSwiftUI -m lint || true\nelse\n  echo \"Skipping the script because of preview mode\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

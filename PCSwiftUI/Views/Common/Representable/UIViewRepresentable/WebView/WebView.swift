@@ -71,3 +71,14 @@ struct WebView: UIViewRepresentable {
     webView.load(request)
   }
 }
+
+#if DEBUG
+  struct WebView_Previews: PreviewProvider {
+    static var previews: some View {
+      ForEach(ColorScheme.allCases, id: \.self) {
+        WebView(urlString: "https://github.com/octocat")
+          .preferredColorScheme($0)
+      }
+    }
+  }
+#endif

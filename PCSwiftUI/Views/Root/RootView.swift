@@ -42,3 +42,15 @@ struct RootView: View {
     })
   }
 }
+
+#if DEBUG
+  struct RootView_Previews: PreviewProvider {
+    static var previews: some View {
+      ForEach(ColorScheme.allCases, id: \.self) {
+        RootView()
+          .environmentObject(ScreenCoordinator())
+          .preferredColorScheme($0)
+      }
+    }
+  }
+#endif

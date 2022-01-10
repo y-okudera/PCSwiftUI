@@ -41,8 +41,13 @@ struct RepositoryListView: View {
   }
 }
 
-struct RepositoryListView_Previews: PreviewProvider {
-  static var previews: some View {
-    RepositoryListView()
+#if DEBUG
+  struct RepositoryListView_Previews: PreviewProvider {
+    static var previews: some View {
+      ForEach(ColorScheme.allCases, id: \.self) {
+        RepositoryListView()
+          .preferredColorScheme($0)
+      }
+    }
   }
-}
+#endif

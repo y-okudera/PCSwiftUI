@@ -16,3 +16,14 @@ struct ActivityIndicator: UIViewRepresentable {
     activityIndicatorView.startAnimating()
   }
 }
+
+#if DEBUG
+  struct ActivityIndicator_Previews: PreviewProvider {
+    static var previews: some View {
+      ForEach(ColorScheme.allCases, id: \.self) {
+        ActivityIndicator()
+          .preferredColorScheme($0)
+      }
+    }
+  }
+#endif

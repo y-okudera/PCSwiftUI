@@ -18,20 +18,10 @@ struct RepositoryOwnerWebView: View {
 #if DEBUG
   struct RepositoryOwnerWebView_Previews: PreviewProvider {
     static var previews: some View {
-      let repository = Repository(
-        id: 1_300_192.description,
-        fullName: "octocat/Spoon-Knife",
-        description: "This repo is for demonstration purposes only.",
-        stargazersCount: 10673,
-        language: "HTML",
-        owner: User(
-          id: 583231.description,
-          login: "octocat",
-          avatarUrl: URL(string: "https://avatars.githubusercontent.com/u/583231?v=4")!,
-          htmlUrl: URL(string: "https://github.com/octocat")!
-        )
-      )
-      RepositoryOwnerWebView(htmlUrl: repository.owner.htmlUrl)
+      ForEach(ColorScheme.allCases, id: \.self) {
+        RepositoryOwnerWebView(htmlUrl: Repository.mock.owner.htmlUrl)
+          .preferredColorScheme($0)
+      }
     }
   }
 #endif
