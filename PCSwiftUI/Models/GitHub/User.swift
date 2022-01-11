@@ -25,12 +25,23 @@ struct User: Decodable, Hashable, Identifiable {
     self.htmlUrl = htmlUrl
   }
 
-  init(response: SearchRepositoryResponse.User) {
+  init(response: GitHubUser) {
     self.init(
       id: response.id.description,
       login: response.login,
       avatarUrl: response.avatarUrl,
       htmlUrl: response.htmlUrl
+    )
+  }
+}
+
+extension User {
+  static var mock: Self {
+    return Self(
+      id: 583231.description,
+      login: "octocat",
+      avatarUrl: URL(string: "https://avatars.githubusercontent.com/u/583231?v=4")!,
+      htmlUrl: URL(string: "https://github.com/octocat")!
     )
   }
 }

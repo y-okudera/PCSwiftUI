@@ -31,7 +31,7 @@ struct Repository: Decodable, Hashable, Identifiable {
     self.owner = owner
   }
 
-  init(response: SearchRepositoryResponse.Repository) {
+  init(response: GitHubRepository) {
     self.init(
       id: response.id.description,
       fullName: response.fullName,

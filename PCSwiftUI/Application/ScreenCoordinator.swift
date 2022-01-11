@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-final class ScreenCoordinator: ObservableObject {
+class ScreenCoordinator: ObservableObject {
   @Published var selectedTabItem = 0
   @Published var selectedUserPageUrl = Selection<String>(isSelected: false, item: nil)
 }
 
-extension ScreenCoordinator {
-  struct Selection<T> {
-    var isSelected = false
-    var item: T?
-  }
+struct Selection<T> {
+  var isSelected = false
+  var item: T?
 }

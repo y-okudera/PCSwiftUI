@@ -22,11 +22,11 @@ struct RootView: View {
         }
         .tag(0)
       #warning("Will impl screen")
-      Text("ToDo")
+      UserListView()
         .tabItem {
           VStack {
-            Image(systemName: "gearshape")
-            Text("設定")
+            Image(systemName: "person.fill")
+            Text("User")
           }
         }.tag(1)
     }
@@ -41,10 +41,10 @@ struct RootView: View {
         // Searchタブを選択
         screenCoordinator.selectedTabItem = 0
         // Push遷移していた場合にPopする
-        screenCoordinator.selectedUserPageUrl = ScreenCoordinator.Selection(isSelected: false, item: nil)
+        screenCoordinator.selectedUserPageUrl = Selection(isSelected: false, item: nil)
         // 遷移アニメーションが見えるようにするためdelayをかける
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750)) {
-          screenCoordinator.selectedUserPageUrl = ScreenCoordinator.Selection(isSelected: true, item: urlString)
+          screenCoordinator.selectedUserPageUrl = Selection(isSelected: true, item: urlString)
         }
       case .none:
         print("Deeplink none.")

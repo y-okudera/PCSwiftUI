@@ -15,7 +15,7 @@ struct RepositoryListRow: View {
 
   var body: some View {
     Button {
-      screenCoordinator.selectedUserPageUrl = ScreenCoordinator.Selection(isSelected: true, item: repository.owner.htmlUrl.absoluteString)
+      screenCoordinator.selectedUserPageUrl = Selection(isSelected: true, item: repository.owner.htmlUrl.absoluteString)
     } label: {
       Text(repository.fullName)
         .foregroundColor(colorScheme == .light ? .black : .white)
