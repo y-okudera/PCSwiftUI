@@ -9,13 +9,12 @@ import SwiftUI
 
 struct RootView: View {
 
-  @EnvironmentObject private var screenCoordinator: ScreenCoordinator
-
+  @State private var tabIndex: Int = 0
   private let repositoryListRouter = RepositoryListRouterImpl(isPresented: .constant(false))
   private let userListRouter = UserListRouterImpl(isPresented: .constant(false))
 
   var body: some View {
-    TabView(selection: $screenCoordinator.selectedTabItem) {
+    TabView(selection: $tabIndex) {
       RepositoryListView(router: repositoryListRouter)
         .tabItem {
           VStack {
@@ -37,11 +36,11 @@ struct RootView: View {
       case .tab(let index):
         print("Deeplink .tab index=\(index)")
         // タブを選択
-        screenCoordinator.selectedTabItem = index
+        tabIndex = index
       case .user(let urlString):
         print("Deeplink .user urlString=\(urlString)")
         // Searchタブを選択
-        screenCoordinator.selectedTabItem = 0
+        tabIndex = 0
         // Push遷移していた場合にPopする
         repositoryListRouter.pop()
         // 遷移アニメーションが見えるようにするためdelayをかける
@@ -60,7 +59,6 @@ struct RootView: View {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
         RootView()
-          .environmentObject(ScreenCoordinator())
           .preferredColorScheme($0)
       }
     }

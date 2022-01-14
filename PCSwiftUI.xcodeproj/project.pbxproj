@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B62F6D85278B2B4000FACD4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F6D84278B2B4000FACD4C /* AppDelegate.swift */; };
 		B62F6D89278B3FF700FACD4C /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F6D88278B3FF700FACD4C /* RootView.swift */; };
-		B62F6D8B278B519E00FACD4C /* ScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F6D8A278B519E00FACD4C /* ScreenCoordinator.swift */; };
 		B62F6D8D278B51BB00FACD4C /* Deeplink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F6D8C278B51BB00FACD4C /* Deeplink.swift */; };
 		B64AA59A2789393D001D16BB /* SearchRepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA5992789393D001D16BB /* SearchRepositoryResponse.swift */; };
 		B64AA59C27893B49001D16BB /* RepositoryListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AA59B27893B49001D16BB /* RepositoryListState.swift */; };
@@ -84,7 +83,6 @@
 		B62F6D84278B2B4000FACD4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B62F6D86278B39BD00FACD4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B62F6D88278B3FF700FACD4C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		B62F6D8A278B519E00FACD4C /* ScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCoordinator.swift; sourceTree = "<group>"; };
 		B62F6D8C278B51BB00FACD4C /* Deeplink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deeplink.swift; sourceTree = "<group>"; };
 		B64AA5992789393D001D16BB /* SearchRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryResponse.swift; sourceTree = "<group>"; };
 		B64AA59B27893B49001D16BB /* RepositoryListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListState.swift; sourceTree = "<group>"; };
@@ -320,13 +318,12 @@
 			path = Flux;
 			sourceTree = "<group>";
 		};
-		B64F11F32785C943001C5AB0 /* Models */ = {
+		B64F11F32785C943001C5AB0 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				B64AF657278C60F10061C71D /* GitHub */,
-				B64AA596278938A8001D16BB /* State */,
 			);
-			path = Models;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		B64F11F42785C94F001C5AB0 /* Views */ = {
@@ -441,7 +438,6 @@
 				B62F6D84278B2B4000FACD4C /* AppDelegate.swift */,
 				B62F6D86278B39BD00FACD4C /* Info.plist */,
 				B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */,
-				B62F6D8A278B519E00FACD4C /* ScreenCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -554,14 +550,15 @@
 		B66DCC272780A209007663D6 /* PCSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				B65613D8279080CC0099E10D /* Router */,
 				B64F121F2785EF45001C5AB0 /* Application */,
 				FC8C9431278689A9000E81AF /* DependencyInjection */,
+				B64F11F32785C943001C5AB0 /* Entities */,
 				B64F11F22785C93C001C5AB0 /* Flux */,
-				B64F11F32785C943001C5AB0 /* Models */,
 				FC8C942927868947000E81AF /* PropertyWrapper */,
 				B64F120F2785E48A001C5AB0 /* Repositories */,
 				B64F11F52785C9B4001C5AB0 /* Resources */,
+				B65613D8279080CC0099E10D /* Router */,
+				B64AA596278938A8001D16BB /* State */,
 				B64F11F42785C94F001C5AB0 /* Views */,
 			);
 			path = PCSwiftUI;
@@ -842,7 +839,6 @@
 				B64AA5AC2789BAB1001D16BB /* Error+.swift in Sources */,
 				B64F12152785E7E3001C5AB0 /* SearchRepositoryRequest.swift in Sources */,
 				B64AF643278C51AF0061C71D /* UserListActionCreator.swift in Sources */,
-				B62F6D8B278B519E00FACD4C /* ScreenCoordinator.swift in Sources */,
 				B65613E527908CB80099E10D /* UserListRouter.swift in Sources */,
 				B64F12212785F553001C5AB0 /* APIRequestable.swift in Sources */,
 				B64F12132785E798001C5AB0 /* APIError.swift in Sources */,
