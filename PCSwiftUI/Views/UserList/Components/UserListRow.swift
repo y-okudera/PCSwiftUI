@@ -9,14 +9,11 @@ import SwiftUI
 
 struct UserListRow: View {
   @Environment(\.colorScheme) private var colorScheme
-
   @State var user: User
+  let action: () -> Void
 
   var body: some View {
-    Button {
-      #warning("Will impl transition.")
-      print("Selected User: \(user.login)")
-    } label: {
+    Button(action: action) {
       Text(user.login)
         .foregroundColor(colorScheme == .light ? .black : .white)
     }
@@ -27,7 +24,7 @@ struct UserListRow: View {
   struct UserListRow_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        UserListRow(user: User.mock)
+        UserListRow(user: User.mock, action: {})
           .preferredColorScheme($0)
       }
     }

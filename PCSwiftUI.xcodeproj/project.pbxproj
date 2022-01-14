@@ -44,6 +44,11 @@
 		B64F12262785FA52001C5AB0 /* Request in Frameworks */ = {isa = PBXBuildFile; productRef = B64F12252785FA52001C5AB0 /* Request */; };
 		B64F122A27860E7E001C5AB0 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64F122927860E7E001C5AB0 /* WebView.swift */; };
 		B652F2F6278A8B0600F38D11 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B652F2F5278A8B0600F38D11 /* View+.swift */; };
+		B65613DA279080E00099E10D /* SheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65613D9279080E00099E10D /* SheetModifier.swift */; };
+		B65613DC279081450099E10D /* NavigationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65613DB279081450099E10D /* NavigationModifier.swift */; };
+		B65613DE2790828D0099E10D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65613DD2790828D0099E10D /* Router.swift */; };
+		B65613E527908CB80099E10D /* UserListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65613E427908CB80099E10D /* UserListRouter.swift */; };
+		B65613E82790935E0099E10D /* RepositoryListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65613E72790935E0099E10D /* RepositoryListRouter.swift */; };
 		B6593A4227873C4F00592E77 /* SearchNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6593A4127873C4F00592E77 /* SearchNavigation.swift */; };
 		B66DCC292780A209007663D6 /* PCSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */; };
 		B66DCC2B2780A209007663D6 /* RepositoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66DCC2A2780A209007663D6 /* RepositoryListView.swift */; };
@@ -115,6 +120,11 @@
 		B64F12202785F553001C5AB0 /* APIRequestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestable.swift; sourceTree = "<group>"; };
 		B64F122927860E7E001C5AB0 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		B652F2F5278A8B0600F38D11 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		B65613D9279080E00099E10D /* SheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetModifier.swift; sourceTree = "<group>"; };
+		B65613DB279081450099E10D /* NavigationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModifier.swift; sourceTree = "<group>"; };
+		B65613DD2790828D0099E10D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		B65613E427908CB80099E10D /* UserListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListRouter.swift; sourceTree = "<group>"; };
+		B65613E72790935E0099E10D /* RepositoryListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryListRouter.swift; sourceTree = "<group>"; };
 		B6593A4127873C4F00592E77 /* SearchNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigation.swift; sourceTree = "<group>"; };
 		B66DCC252780A209007663D6 /* PCSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PCSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66DCC282780A209007663D6 /* PCSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCSwiftUIApp.swift; sourceTree = "<group>"; };
@@ -285,7 +295,8 @@
 		B64AF652278C5D2B0061C71D /* UserList */ = {
 			isa = PBXGroup;
 			children = (
-				B64AF655278C5D3D0061C71D /* UserListRow.swift */,
+				B65613E327908CAA0099E10D /* Router */,
+				B65613E227908C830099E10D /* Components */,
 				B64AF653278C5D330061C71D /* UserListView.swift */,
 			);
 			path = UserList;
@@ -321,11 +332,11 @@
 		B64F11F42785C94F001C5AB0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B64AF652278C5D2B0061C71D /* UserList */,
 				B64F122727860E6A001C5AB0 /* Common */,
 				B64F121D2785EDE1001C5AB0 /* RepositoryList */,
 				B6593A3A27871EA200592E77 /* RepositoryOwner */,
 				B62F6D87278B3FE400FACD4C /* Root */,
+				B64AF652278C5D2B0061C71D /* UserList */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -409,8 +420,9 @@
 		B64F121D2785EDE1001C5AB0 /* RepositoryList */ = {
 			isa = PBXGroup;
 			children = (
-				B64F12162785E9B5001C5AB0 /* RepositoryListRow.swift */,
+				B65613E127908C660099E10D /* Components */,
 				B66DCC2A2780A209007663D6 /* RepositoryListView.swift */,
+				B65613E6279093550099E10D /* Router */,
 			);
 			path = RepositoryList;
 			sourceTree = "<group>";
@@ -460,6 +472,48 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		B65613D8279080CC0099E10D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B65613DB279081450099E10D /* NavigationModifier.swift */,
+				B65613DD2790828D0099E10D /* Router.swift */,
+				B65613D9279080E00099E10D /* SheetModifier.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		B65613E127908C660099E10D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B64F12162785E9B5001C5AB0 /* RepositoryListRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B65613E227908C830099E10D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B64AF655278C5D3D0061C71D /* UserListRow.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B65613E327908CAA0099E10D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B65613E427908CB80099E10D /* UserListRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		B65613E6279093550099E10D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B65613E72790935E0099E10D /* RepositoryListRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		B6593A3A27871EA200592E77 /* RepositoryOwner */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,6 +554,7 @@
 		B66DCC272780A209007663D6 /* PCSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				B65613D8279080CC0099E10D /* Router */,
 				B64F121F2785EF45001C5AB0 /* Application */,
 				FC8C9431278689A9000E81AF /* DependencyInjection */,
 				B64F11F22785C93C001C5AB0 /* Flux */,
@@ -758,6 +813,7 @@
 				B64AA5B12789E5D3001D16BB /* ActivityIndicator.swift in Sources */,
 				B64AF641278C519B0061C71D /* UserListAction.swift in Sources */,
 				B66DCC2B2780A209007663D6 /* RepositoryListView.swift in Sources */,
+				B65613E82790935E0099E10D /* RepositoryListRouter.swift in Sources */,
 				B64F12172785E9B5001C5AB0 /* RepositoryListRow.swift in Sources */,
 				FC8C942E27868980000E81AF /* InjectedValues.swift in Sources */,
 				B64AA5A527898594001D16BB /* APIResponse.swift in Sources */,
@@ -768,6 +824,7 @@
 				B64AA5A027896A1C001D16BB /* User.swift in Sources */,
 				B64AF63C278C4DDB0061C71D /* SearchUserRequest.swift in Sources */,
 				B64AF656278C5D3D0061C71D /* UserListRow.swift in Sources */,
+				B65613DE2790828D0099E10D /* Router.swift in Sources */,
 				B62F6D8D278B51BB00FACD4C /* Deeplink.swift in Sources */,
 				FC8C943627868A84000E81AF /* APIRepositoryProviderKey.swift in Sources */,
 				B64AA59C27893B49001D16BB /* RepositoryListState.swift in Sources */,
@@ -776,6 +833,7 @@
 				B64AF64C278C56DE0061C71D /* GitHubRepository.swift in Sources */,
 				FC8C942C2786896F000E81AF /* Injected.swift in Sources */,
 				B64AA59E278969E0001D16BB /* Repository.swift in Sources */,
+				B65613DC279081450099E10D /* NavigationModifier.swift in Sources */,
 				B64F122A27860E7E001C5AB0 /* WebView.swift in Sources */,
 				B64AF647278C51F80061C71D /* UserListStore.swift in Sources */,
 				B64F12082785DAD3001C5AB0 /* RepositoryListStore.swift in Sources */,
@@ -785,9 +843,11 @@
 				B64F12152785E7E3001C5AB0 /* SearchRepositoryRequest.swift in Sources */,
 				B64AF643278C51AF0061C71D /* UserListActionCreator.swift in Sources */,
 				B62F6D8B278B519E00FACD4C /* ScreenCoordinator.swift in Sources */,
+				B65613E527908CB80099E10D /* UserListRouter.swift in Sources */,
 				B64F12212785F553001C5AB0 /* APIRequestable.swift in Sources */,
 				B64F12132785E798001C5AB0 /* APIError.swift in Sources */,
 				B64AA5AE2789D318001D16BB /* Array+.swift in Sources */,
+				B65613DA279080E00099E10D /* SheetModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

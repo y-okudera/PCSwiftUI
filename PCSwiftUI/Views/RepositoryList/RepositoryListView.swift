@@ -7,14 +7,15 @@
 
 import SwiftUI
 
-struct RepositoryListView: View {
+struct RepositoryListView<R: RepositoryListRouter>: View {
   @Environment(\.colorScheme) private var colorScheme
-  @EnvironmentObject private var screenCoordinator: ScreenCoordinator
 
   @ObservedObject var store: RepositoryListStore = .shared
   private var actionCreator: RepositoryListActionCreator
+  @StateObject private var router: R
 
-  init(actionCreator: RepositoryListActionCreator = .init()) {
+  init(router: R, actionCreator: RepositoryListActionCreator = .init()) {
+    _router = StateObject(wrappedValue: router)
     self.actionCreator = actionCreator
   }
 
@@ -22,7 +23,9 @@ struct RepositoryListView: View {
     SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchRepositories(searchQuery: store.searchQuery) }) {
       List {
         ForEach(store.repositoryListState.repositories) { repository in
-          RepositoryListRow(repository: repository)
+          RepositoryListRow(repository: repository) {
+            router.navigateToRepositoryOwner(urlString: repository.owner.htmlUrl.absoluteString)
+          }
         }
         HStack {
           Spacer()
@@ -35,17 +38,11 @@ struct RepositoryListView: View {
         // 次のページがない場合、リスト末尾にインジケーターを表示しない
         .hidden(!store.hasNext)
       }
-      .background(
-        NavigationLink(
-          destination: RepositoryOwnerWebView(urlString: screenCoordinator.selectedUserPageUrl.item),
-          isActive: $screenCoordinator.selectedUserPageUrl.isSelected,
-          label: { EmptyView() }
-        )
-      )
       .alert(isPresented: $store.isErrorShown) { () -> Alert in
         Alert(title: Text(store.errorTitle), message: Text(store.errorMessage))
       }
       .navigationBarTitle(Text("Repositories"))
+      .navigation(router)
     }
     .edgesIgnoringSafeArea([.top, .bottom])
   }
@@ -55,8 +52,7 @@ struct RepositoryListView: View {
   struct RepositoryListView_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        RepositoryListView()
-          .environmentObject(ScreenCoordinator())
+        RepositoryListView(router: RepositoryListRouterImpl(isPresented: .constant(false)))
           .preferredColorScheme($0)
       }
     }

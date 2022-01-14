@@ -11,9 +11,12 @@ struct RootView: View {
 
   @EnvironmentObject private var screenCoordinator: ScreenCoordinator
 
+  private let repositoryListRouter = RepositoryListRouterImpl(isPresented: .constant(false))
+  private let userListRouter = UserListRouterImpl(isPresented: .constant(false))
+
   var body: some View {
     TabView(selection: $screenCoordinator.selectedTabItem) {
-      RepositoryListView()
+      RepositoryListView(router: repositoryListRouter)
         .tabItem {
           VStack {
             Image(systemName: "magnifyingglass")
@@ -21,8 +24,7 @@ struct RootView: View {
           }
         }
         .tag(0)
-      #warning("Will impl screen")
-      UserListView()
+      UserListView(router: userListRouter)
         .tabItem {
           VStack {
             Image(systemName: "person.fill")
@@ -41,10 +43,10 @@ struct RootView: View {
         // Searchタブを選択
         screenCoordinator.selectedTabItem = 0
         // Push遷移していた場合にPopする
-        screenCoordinator.selectedUserPageUrl = Selection(isSelected: false, item: nil)
+        repositoryListRouter.pop()
         // 遷移アニメーションが見えるようにするためdelayをかける
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750)) {
-          screenCoordinator.selectedUserPageUrl = Selection(isSelected: true, item: urlString)
+          repositoryListRouter.navigateToRepositoryOwner(urlString: urlString)
         }
       case .none:
         print("Deeplink none.")

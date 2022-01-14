@@ -9,14 +9,11 @@ import SwiftUI
 
 struct RepositoryListRow: View {
   @Environment(\.colorScheme) private var colorScheme
-  @EnvironmentObject private var screenCoordinator: ScreenCoordinator
-
   @State var repository: Repository
+  let action: () -> Void
 
   var body: some View {
-    Button {
-      screenCoordinator.selectedUserPageUrl = Selection(isSelected: true, item: repository.owner.htmlUrl.absoluteString)
-    } label: {
+    Button(action: action) {
       Text(repository.fullName)
         .foregroundColor(colorScheme == .light ? .black : .white)
     }
@@ -27,8 +24,7 @@ struct RepositoryListRow: View {
   struct RepositoryListRow_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        RepositoryListRow(repository: Repository.mock)
-          .environmentObject(ScreenCoordinator())
+        RepositoryListRow(repository: Repository.mock, action: {})
           .preferredColorScheme($0)
       }
     }
