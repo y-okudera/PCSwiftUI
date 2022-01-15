@@ -1,5 +1,5 @@
 //
-//  RepositoryListRouter.swift
+//  RepoListRouter.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/14.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol RepositoryListRouter: Router {
+protocol RepoListRouter: Router {
   func navigateToRepositoryOwner(urlString: String)
 }
 
-final class RepositoryListRouterImpl: Router, RepositoryListRouter {
+final class RepoListRouterImpl: Router, RepoListRouter {
 
   func navigateToRepositoryOwner(urlString: String) {
     let router = Router(isPresented: isNavigating)

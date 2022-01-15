@@ -1,5 +1,5 @@
 //
-//  RepositoryListView.swift
+//  RepoListView.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/01.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct RepositoryListView<R: RepositoryListRouter>: View {
+struct RepoListView<R: RepoListRouter>: View {
   @Environment(\.colorScheme) private var colorScheme
 
-  @ObservedObject var store: RepositoryListStore = .shared
-  private var actionCreator: RepositoryListActionCreator
+  @ObservedObject var store: RepoListStore = .shared
+  private var actionCreator: RepoListActionCreator
   @StateObject private var router: R
 
-  init(router: R, actionCreator: RepositoryListActionCreator = .init()) {
+  init(router: R, actionCreator: RepoListActionCreator = .init()) {
     _router = StateObject(wrappedValue: router)
     self.actionCreator = actionCreator
   }
@@ -22,8 +22,8 @@ struct RepositoryListView<R: RepositoryListRouter>: View {
   var body: some View {
     SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchRepositories(searchQuery: store.searchQuery) }) {
       List {
-        ForEach(store.repositoryListState.repositories) { repository in
-          RepositoryListRow(repository: repository) {
+        ForEach(store.repoListState.repositories) { repository in
+          RepoListRow(repository: repository) {
             router.navigateToRepositoryOwner(urlString: repository.owner.htmlUrl.absoluteString)
           }
         }
@@ -49,10 +49,10 @@ struct RepositoryListView<R: RepositoryListRouter>: View {
 }
 
 #if DEBUG
-  struct RepositoryListView_Previews: PreviewProvider {
+  struct RepoListView_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        RepositoryListView(router: RepositoryListRouterImpl(isPresented: .constant(false)))
+        RepoListView(router: RepoListRouterImpl(isPresented: .constant(false)))
           .preferredColorScheme($0)
       }
     }

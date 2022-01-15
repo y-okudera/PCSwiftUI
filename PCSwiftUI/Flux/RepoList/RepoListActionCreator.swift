@@ -1,5 +1,5 @@
 //
-//  RepositoryListActionCreator.swift
+//  RepoListActionCreator.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/05.
@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-final class RepositoryListActionCreator {
-  private let dispatcher: RepositoryListDispatcher
+final class RepoListActionCreator {
+  private let dispatcher: RepoListDispatcher
 
   @Injected(\.apiRepositoryProvider)
   private var apiRepository: APIRepositoryProviding
@@ -24,7 +24,7 @@ final class RepositoryListActionCreator {
 
   private let errorSubject = PassthroughSubject<APIError, Never>()
 
-  init(dispatcher: RepositoryListDispatcher = .shared) {
+  init(dispatcher: RepoListDispatcher = .shared) {
     self.dispatcher = dispatcher
     bindData()
     bindActions()
@@ -73,7 +73,7 @@ final class RepositoryListActionCreator {
     // リポジトリ検索結果を反映
     let responseDataStream =
       responseSubject
-      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.initializeRepositoryListState($0)) })
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.initializeRepoListState($0)) })
 
     // 検索結果が0件の場合、エラーメッセージを更新
     let emptyDataStream =
@@ -91,7 +91,7 @@ final class RepositoryListActionCreator {
 
     let additionalResponseDataStream =
       additionalResponseSubject
-      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateRepositoryListState($0)) })
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateRepoListState($0)) })
 
     // errorSubjectにerrorが送られてきたら、エラーメッセージを更新
     let errorDataStream =

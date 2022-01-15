@@ -10,12 +10,12 @@ import SwiftUI
 struct RootView: View {
 
   @State private var tabIndex: Int = 0
-  private let repositoryListRouter = RepositoryListRouterImpl(isPresented: .constant(false))
+  private let repoListRouter = RepoListRouterImpl(isPresented: .constant(false))
   private let userListRouter = UserListRouterImpl(isPresented: .constant(false))
 
   var body: some View {
     TabView(selection: $tabIndex) {
-      RepositoryListView(router: repositoryListRouter)
+      RepoListView(router: repoListRouter)
         .tabItem {
           VStack {
             Image(systemName: "magnifyingglass")
@@ -42,10 +42,10 @@ struct RootView: View {
         // Searchタブを選択
         tabIndex = 0
         // Push遷移していた場合にPopする
-        repositoryListRouter.pop()
+        repoListRouter.pop()
         // 遷移アニメーションが見えるようにするためdelayをかける
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750)) {
-          repositoryListRouter.navigateToRepositoryOwner(urlString: urlString)
+          repoListRouter.navigateToRepositoryOwner(urlString: urlString)
         }
       case .none:
         print("Deeplink none.")

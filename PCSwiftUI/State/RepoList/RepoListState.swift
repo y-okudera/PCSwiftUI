@@ -1,5 +1,5 @@
 //
-//  RepositoryListState.swift
+//  RepoListState.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/08.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RepositoryListState {
+struct RepoListState {
   var repositoryIDs: [String]
   var repositoriesByID: [String: Repository]
   var ownersByID: [String: User]

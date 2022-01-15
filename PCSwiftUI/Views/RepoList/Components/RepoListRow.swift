@@ -1,5 +1,5 @@
 //
-//  RepositoryListRow.swift
+//  RepoListRow.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/05.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RepositoryListRow: View {
+struct RepoListRow: View {
   @Environment(\.colorScheme) private var colorScheme
   @State var repository: Repository
   let action: () -> Void
@@ -21,10 +21,10 @@ struct RepositoryListRow: View {
 }
 
 #if DEBUG
-  struct RepositoryListRow_Previews: PreviewProvider {
+  struct RepoListRow_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        RepositoryListRow(repository: Repository.mock, action: {})
+        RepoListRow(repository: Repository.mock, action: {})
           .preferredColorScheme($0)
       }
     }
