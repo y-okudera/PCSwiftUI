@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserListRow: View {
   @Environment(\.colorScheme) private var colorScheme
-  @State var user: User
+  @State var user: UserAggregate
   let action: () -> Void
 
   var body: some View {
@@ -24,7 +24,7 @@ struct UserListRow: View {
   struct UserListRow_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        UserListRow(user: User.mock, action: {})
+        UserListRow(user: UserAggregate.mock, action: {})
           .preferredColorScheme($0)
       }
     }

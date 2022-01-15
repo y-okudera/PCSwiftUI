@@ -1,5 +1,5 @@
 //
-//  Repository.swift
+//  RepoAggregate.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/08.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct Repository: Decodable, Hashable, Identifiable {
-  var id: String
-  var fullName: String
-  var description: String?
-  var stargazersCount: Int = 0
-  var language: String?
-  var owner: User
+struct RepoAggregate: Decodable, Hashable, Identifiable {
+  let id: String
+  let fullName: String
+  let description: String?
+  let stargazersCount: Int
+  let language: String?
+  let owner: UserAggregate
 
   init(
     id: String,
@@ -21,7 +21,7 @@ struct Repository: Decodable, Hashable, Identifiable {
     description: String?,
     stargazersCount: Int,
     language: String?,
-    owner: User
+    owner: UserAggregate
   ) {
     self.id = id
     self.fullName = fullName
@@ -43,7 +43,8 @@ struct Repository: Decodable, Hashable, Identifiable {
   }
 }
 
-extension Repository {
+// MARK: - Mock
+extension RepoAggregate {
   static var mock: Self {
     return Self(
       id: 1_300_192.description,
@@ -51,7 +52,7 @@ extension Repository {
       description: "This repo is for demonstration purposes only.",
       stargazersCount: 10673,
       language: "HTML",
-      owner: User(
+      owner: UserAggregate(
         id: 583231.description,
         login: "octocat",
         avatarUrl: URL(string: "https://avatars.githubusercontent.com/u/583231?v=4")!,

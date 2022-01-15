@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RepoListRow: View {
   @Environment(\.colorScheme) private var colorScheme
-  @State var repository: Repository
+  @State var repository: RepoAggregate
   let action: () -> Void
 
   var body: some View {
@@ -24,7 +24,7 @@ struct RepoListRow: View {
   struct RepoListRow_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        RepoListRow(repository: Repository.mock, action: {})
+        RepoListRow(repository: RepoAggregate.mock, action: {})
           .preferredColorScheme($0)
       }
     }

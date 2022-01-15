@@ -11,8 +11,8 @@ import Foundation
 final class RepoListActionCreator {
   private let dispatcher: RepoListDispatcher
 
-  @Injected(\.apiRepositoryProvider)
-  private var apiRepository: APIRepositoryProviding
+  @Injected(\.repoRepositoryProvider)
+  private var repoRepository: RepoRepositoryProviding
 
   private var cancellables: [AnyCancellable] = []
 
@@ -34,10 +34,14 @@ final class RepoListActionCreator {
     // searchRepositoriesSubjectにstringが送られてきたらAPIリクエストする
     let responsePublisher =
       searchRepositoriesSubject.share()
-      .flatMap { [apiRepository] searchQuery in
-        apiRepository.response(from: SearchRepositoryRequest(searchQuery: searchQuery, page: 1))
-          .catch { [weak self] error -> Empty<APIResponse<SearchRepositoryResponse>, Never> in
-            self?.errorSubject.send(APIError(error: error))
+      .map { [dispatcher] searchQuery in
+        dispatcher.dispatch(.initializePage)
+        return searchQuery
+      }
+      .flatMap { [repoRepository] searchQuery in
+        repoRepository.response(searchQuery: searchQuery, page: 1)
+          .catch { [weak self] apiError -> Empty<APIResponse<SearchRepositoryResponse>, Never> in
+            self?.errorSubject.send(apiError)
             return .init()
           }
       }
@@ -50,10 +54,10 @@ final class RepoListActionCreator {
     // additionalSearchRepositoriesSubjectに(string, int)が送られてきたら追加読み込みのAPIリクエストする
     let additionalResponsePublisher =
       additionalSearchRepositoriesSubject.share()
-      .flatMap { [apiRepository] searchQuery, page in
-        apiRepository.response(from: SearchRepositoryRequest(searchQuery: searchQuery, page: page))
-          .catch { [weak self] error -> Empty<APIResponse<SearchRepositoryResponse>, Never> in
-            self?.errorSubject.send(APIError(error: error))
+      .flatMap { [repoRepository] searchQuery, page in
+        repoRepository.response(searchQuery: searchQuery, page: page)
+          .catch { [weak self] apiError -> Empty<APIResponse<SearchRepositoryResponse>, Never> in
+            self?.errorSubject.send(apiError)
             return .init()
           }
       }

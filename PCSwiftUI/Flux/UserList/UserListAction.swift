@@ -8,6 +8,8 @@
 import Foundation
 
 enum UserListAction {
+  /// ページ番号を初期化する
+  case initializePage
   ///  1ページ目の読み込み結果を反映
   case initializeUserListState(APIResponse<SearchUserResponse>)
   ///  2ページ目以降の読み込み結果を反映

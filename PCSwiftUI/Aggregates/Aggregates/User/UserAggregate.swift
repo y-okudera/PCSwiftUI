@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  UserAggregate.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/08.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct User: Decodable, Hashable, Identifiable {
-  var id: String
-  var login: String
-  var avatarUrl: URL
-  var htmlUrl: URL
+struct UserAggregate: Decodable, Hashable, Identifiable {
+  let id: String
+  let login: String
+  let avatarUrl: URL
+  let htmlUrl: URL
 
   init(
     id: String,
@@ -35,7 +35,7 @@ struct User: Decodable, Hashable, Identifiable {
   }
 }
 
-extension User {
+extension UserAggregate {
   static var mock: Self {
     return Self(
       id: 583231.description,

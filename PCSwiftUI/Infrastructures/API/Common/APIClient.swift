@@ -1,5 +1,5 @@
 //
-//  APIRepository.swift
+//  APIClient.swift
 //  PCSwiftUI
 //
 //  Created by Yuki Okudera on 2022/01/05.
@@ -10,11 +10,11 @@ import Foundation
 import Json
 import Request
 
-protocol APIRepositoryProviding {
+protocol APIClientProviding {
   func response<T: APIRequestable>(from apiRequest: T) -> AnyPublisher<APIResponse<T.Response>, Error>
 }
 
-struct APIRepository: APIRepositoryProviding {
+struct APIClient: APIClientProviding {
 
   func response<T: APIRequestable>(from apiRequest: T) -> AnyPublisher<APIResponse<T.Response>, Error> {
     Request {

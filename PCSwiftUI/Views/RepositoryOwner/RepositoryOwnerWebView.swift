@@ -25,7 +25,7 @@ struct RepositoryOwnerWebView: View {
   struct RepositoryOwnerWebView_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        RepositoryOwnerWebView(urlString: Repository.mock.owner.htmlUrl.absoluteString, router: Router(isPresented: .constant(false)))
+        RepositoryOwnerWebView(urlString: RepoAggregate.mock.owner.htmlUrl.absoluteString, router: Router(isPresented: .constant(false)))
           .preferredColorScheme($0)
       }
     }

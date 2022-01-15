@@ -22,7 +22,7 @@ struct UserListView<R: UserListRouter>: View {
   var body: some View {
     SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchUsers(searchQuery: store.searchQuery) }) {
       List {
-        ForEach(store.userListState.users) { user in
+        ForEach(store.userAggregateRoot.users) { user in
           UserListRow(user: user) {
             router.navigateToRepositoryOwner(urlString: user.htmlUrl.absoluteString)
           }
@@ -31,12 +31,12 @@ struct UserListView<R: UserListRouter>: View {
           Spacer()
           ActivityIndicator()
             .onAppear {
-              actionCreator.additionalSearchUsers(searchQuery: store.searchQuery, page: store.page)
+              actionCreator.additionalSearchUsers(searchQuery: store.searchQuery, page: store.userAggregateRoot.page)
             }
           Spacer()
         }
         // 次のページがない場合、リスト末尾にインジケーターを表示しない
-        .hidden(!store.hasNext)
+        .hidden(!store.userAggregateRoot.hasNext)
       }
       .alert(isPresented: $store.isErrorShown) { () -> Alert in
         Alert(title: Text(store.errorTitle), message: Text(store.errorMessage))

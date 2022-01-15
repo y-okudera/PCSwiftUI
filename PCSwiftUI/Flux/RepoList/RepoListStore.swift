@@ -19,27 +19,27 @@ final class RepoListStore: ObservableObject {
   /// エラーダイアログトリガー
   @Published var isErrorShown = false
   /// リポジトリ一覧
-  @Published private(set) var repoListState = RepoListState()
-  /// ページ
-  @Published private(set) var page = 1
-  /// 次のページがあるか
-  ///
-  /// - Note: 初期状態は検索未実施のためfalse
-  @Published private(set) var hasNext = false
+  @Published private(set) var repoAggregateRoot = RepoAggregateRoot()
 
   init(dispatcher: RepoListDispatcher = .shared) {
     dispatcher.register { [weak self] action in
       guard let self = self else { return }
 
       switch action {
+      case .initializePage:
+        self.repoAggregateRoot = .init()
       case .initializeRepoListState(let apiResponse):
-        self.page += 1
-        self.hasNext = apiResponse.gitHubAPIPagination?.hasNext ?? false
-        self.repoListState = .init(response: apiResponse.response)
+        print("initializeRepoListState page=\(self.repoAggregateRoot.page)")
+        self.repoAggregateRoot.set(
+          response: apiResponse.response,
+          hasNext: apiResponse.gitHubAPIPagination?.hasNext ?? false
+        )
       case .updateRepoListState(let apiResponse):
-        self.page += 1
-        self.hasNext = apiResponse.gitHubAPIPagination?.hasNext ?? false
-        self.repoListState.append(response: apiResponse.response)
+        print("updateRepoListState page=\(self.repoAggregateRoot.page)")
+        self.repoAggregateRoot.append(
+          response: apiResponse.response,
+          hasNext: apiResponse.gitHubAPIPagination?.hasNext ?? false
+        )
       case .updateErrorMessage(let title, let message):
         self.errorTitle = title
         self.errorMessage = message

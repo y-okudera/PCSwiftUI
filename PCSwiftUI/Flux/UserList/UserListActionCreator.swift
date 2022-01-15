@@ -11,8 +11,8 @@ import Foundation
 final class UserListActionCreator {
   private let dispatcher: UserListDispatcher
 
-  @Injected(\.apiRepositoryProvider)
-  private var apiRepository: APIRepositoryProviding
+  @Injected(\.userRepositoryProvider)
+  private var userRepository: UserRepositoryProviding
 
   private var cancellables: [AnyCancellable] = []
 
@@ -34,10 +34,14 @@ final class UserListActionCreator {
     // searchUsersSubjectにstringが送られてきたらAPIリクエストする
     let responsePublisher =
       searchUsersSubject.share()
-      .flatMap { [apiRepository] searchQuery in
-        apiRepository.response(from: SearchUserRequest(searchQuery: searchQuery, page: 1))
-          .catch { [weak self] error -> Empty<APIResponse<SearchUserResponse>, Never> in
-            self?.errorSubject.send(APIError(error: error))
+      .map { [dispatcher] searchQuery in
+        dispatcher.dispatch(.initializePage)
+        return searchQuery
+      }
+      .flatMap { [userRepository] searchQuery in
+        userRepository.response(searchQuery: searchQuery, page: 1)
+          .catch { [weak self] apiError -> Empty<APIResponse<SearchUserResponse>, Never> in
+            self?.errorSubject.send(apiError)
             return .init()
           }
       }
@@ -50,10 +54,10 @@ final class UserListActionCreator {
     // additionalSearchUsersSubjectに(string, int)が送られてきたら追加読み込みのAPIリクエストする
     let additionalResponsePublisher =
       additionalSearchUsersSubject.share()
-      .flatMap { [apiRepository] searchQuery, page in
-        apiRepository.response(from: SearchUserRequest(searchQuery: searchQuery, page: page))
-          .catch { [weak self] error -> Empty<APIResponse<SearchUserResponse>, Never> in
-            self?.errorSubject.send(APIError(error: error))
+      .flatMap { [userRepository] searchQuery, page in
+        userRepository.response(searchQuery: searchQuery, page: page)
+          .catch { [weak self] apiError -> Empty<APIResponse<SearchUserResponse>, Never> in
+            self?.errorSubject.send(apiError)
             return .init()
           }
       }

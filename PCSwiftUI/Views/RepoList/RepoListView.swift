@@ -22,7 +22,7 @@ struct RepoListView<R: RepoListRouter>: View {
   var body: some View {
     SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchRepositories(searchQuery: store.searchQuery) }) {
       List {
-        ForEach(store.repoListState.repositories) { repository in
+        ForEach(store.repoAggregateRoot.repositories) { repository in
           RepoListRow(repository: repository) {
             router.navigateToRepositoryOwner(urlString: repository.owner.htmlUrl.absoluteString)
           }
@@ -31,12 +31,12 @@ struct RepoListView<R: RepoListRouter>: View {
           Spacer()
           ActivityIndicator()
             .onAppear {
-              actionCreator.additionalSearchRepositories(searchQuery: store.searchQuery, page: store.page)
+              actionCreator.additionalSearchRepositories(searchQuery: store.searchQuery, page: store.repoAggregateRoot.page)
             }
           Spacer()
         }
         // 次のページがない場合、リスト末尾にインジケーターを表示しない
-        .hidden(!store.hasNext)
+        .hidden(!store.repoAggregateRoot.hasNext)
       }
       .alert(isPresented: $store.isErrorShown) { () -> Alert in
         Alert(title: Text(store.errorTitle), message: Text(store.errorMessage))
