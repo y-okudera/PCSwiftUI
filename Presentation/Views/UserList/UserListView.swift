@@ -26,7 +26,7 @@ struct UserListView<R: UserListRouter>: View {
       List {
         ForEach(store.userAggregateRoot.users) { user in
           UserListRow(title: user.login) {
-            router.navigateToRepositoryOwner(urlString: user.htmlUrl.absoluteString)
+            router.navigateToGeneralWebView(urlString: user.htmlUrl.absoluteString)
           }
         }
         HStack {

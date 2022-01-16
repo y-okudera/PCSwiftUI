@@ -9,15 +9,15 @@
 import Foundation
 
 protocol UserListRouter: Router {
-  func navigateToRepositoryOwner(urlString: String)
+  func navigateToGeneralWebView(urlString: String)
 }
 
 final class UserListRouterImpl: Router, UserListRouter {
 
-  func navigateToRepositoryOwner(urlString: String) {
+  func navigateToGeneralWebView(urlString: String) {
     let router = Router(isPresented: isNavigating)
     navigateTo(
-      RepositoryOwnerWebView(urlString: urlString, router: router)
+      GeneralWebView(urlString: urlString, router: router)
     )
   }
 }

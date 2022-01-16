@@ -1,5 +1,5 @@
 //
-//  RepositoryOwnerWebView.swift
+//  GeneralWebView.swift
 //  Presentation
 //
 //  Created by Yuki Okudera on 2022/01/05.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct RepositoryOwnerWebView: View {
+struct GeneralWebView: View {
   var urlString: String?
   private let router: Router
 
@@ -23,10 +23,10 @@ struct RepositoryOwnerWebView: View {
 }
 
 #if DEBUG
-  struct RepositoryOwnerWebView_Previews: PreviewProvider {
+  struct GeneralWebView_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        RepositoryOwnerWebView(urlString: "https://github.com/octocat", router: Router(isPresented: .constant(false)))
+        GeneralWebView(urlString: "https://github.com/octocat", router: Router(isPresented: .constant(false)))
           .preferredColorScheme($0)
       }
     }

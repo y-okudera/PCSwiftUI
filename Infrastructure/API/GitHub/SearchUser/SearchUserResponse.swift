@@ -9,6 +9,6 @@
 import Foundation
 
 public struct SearchUserResponse: Decodable {
-  public var incompleteResults: Bool
-  public var items: [GitHubUser]
+  public let incompleteResults: Bool
+  public let items: [GitHubUser]
 }

@@ -29,6 +29,7 @@ public struct RepoRepository: RepoRepositoryProviding {
             description: $1.description,
             stargazersCount: $1.stargazersCount,
             language: $1.language,
+            htmlUrl: $1.htmlUrl,
             owner: .init(id: $1.owner.id.description, login: $1.owner.login, avatarUrl: $1.owner.avatarUrl, htmlUrl: $1.owner.htmlUrl)
           )
         }

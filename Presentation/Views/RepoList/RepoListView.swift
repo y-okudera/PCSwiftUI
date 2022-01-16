@@ -26,7 +26,7 @@ struct RepoListView<R: RepoListRouter>: View {
       List {
         ForEach(store.repoAggregateRoot.repositories) { repository in
           RepoListRow(title: repository.fullName) {
-            router.navigateToRepositoryOwner(urlString: repository.owner.htmlUrl.absoluteString)
+            router.navigateToGeneralWebView(urlString: repository.htmlUrl.absoluteString)
           }
         }
         HStack {

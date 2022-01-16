@@ -14,6 +14,7 @@ public struct RepoAggregate: Decodable, Hashable, Identifiable {
   public let description: String?
   public let stargazersCount: Int
   public let language: String?
+  public let htmlUrl: URL
   public let owner: UserAggregate
 
   public init(
@@ -22,6 +23,7 @@ public struct RepoAggregate: Decodable, Hashable, Identifiable {
     description: String?,
     stargazersCount: Int,
     language: String?,
+    htmlUrl: URL,
     owner: UserAggregate
   ) {
     self.id = id
@@ -29,6 +31,7 @@ public struct RepoAggregate: Decodable, Hashable, Identifiable {
     self.description = description
     self.stargazersCount = stargazersCount
     self.language = language
+    self.htmlUrl = htmlUrl
     self.owner = owner
   }
 }
@@ -42,6 +45,7 @@ extension RepoAggregate {
       description: "This repo is for demonstration purposes only.",
       stargazersCount: 10673,
       language: "HTML",
+      htmlUrl: URL(string: "https://github.com/octocat/Spoon-Knife")!,
       owner: UserAggregate(
         id: 583231.description,
         login: "octocat",

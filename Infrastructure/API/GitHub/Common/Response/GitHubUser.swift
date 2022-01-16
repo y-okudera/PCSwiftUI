@@ -9,8 +9,8 @@
 import Foundation
 
 public struct GitHubUser: Decodable {
-  public var id: Int64
-  public var login: String
-  public var avatarUrl: URL
-  public var htmlUrl: URL
+  public let id: Int64
+  public let login: String
+  public let avatarUrl: URL
+  public let htmlUrl: URL
 }

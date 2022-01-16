@@ -13,9 +13,12 @@ import Foundation
 /// - Note: <BR>
 /// e.g. `pcswiftui://tab?index=1`
 ///
+/// e.g. `pcswiftui://repo?url=https://github.com/octocat/Spoon-Knife`
+///
 /// e.g. `pcswiftui://user?url=https://github.com/octocat`
 enum Deeplink {
   case tab(index: Int)
+  case repo(urlString: String)
   case user(urlString: String)
 
   init?(url: URL) {
@@ -32,6 +35,11 @@ enum Deeplink {
         let index = Int(indexString)
       {
         self = .tab(index: index)
+        return
+      }
+    case "repo":
+      if let urlString = queryUrlComponents.queryItems?.first(where: { $0.name == "url" })?.value {
+        self = .repo(urlString: urlString)
         return
       }
     case "user":

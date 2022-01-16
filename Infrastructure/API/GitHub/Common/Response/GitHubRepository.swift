@@ -9,10 +9,11 @@
 import Foundation
 
 public struct GitHubRepository: Decodable {
-  public var id: Int64
-  public var fullName: String
-  public var description: String?
-  public var stargazersCount: Int = 0
-  public var language: String?
-  public var owner: GitHubUser
+  public let id: Int64
+  public let fullName: String
+  public let description: String?
+  public let stargazersCount: Int
+  public let language: String?
+  public let htmlUrl: URL
+  public let owner: GitHubUser
 }
