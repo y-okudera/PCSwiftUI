@@ -12,6 +12,14 @@ bootstrap: ## Install tools
 	make build-cli-tools
 	make format-configuration
 
+.PHONY: project
+project: ## Generate project
+	make xcodegen
+
+.PHONY: xcodegen
+xcodegen: ## Generate Xcode project and workspace
+	swift run -c release --package-path ./Tools xcodegen
+
 .PHONY: swiftgen
 swiftgen: ## Generate resources swift files.
 	swift run -c release --package-path ./Tools swiftgen
@@ -49,3 +57,4 @@ build-cli-tools: # Build CLI tools managed by SwiftPM
 	swift build -c release --package-path ./Tools --product license-plist
 	swift build -c release --package-path ./Tools --product swiftgen
 	swift build -c release --package-path ./Tools --product swift-format
+	swift build -c release --package-path ./Tools --product xcodegen

@@ -90,3 +90,6 @@ iOSInjectionProject/
 
 # Auto generated files
 **/Generated/*
+
+# XcodeGen
+/PCSwiftUI.xcodeproj

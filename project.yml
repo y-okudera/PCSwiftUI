@@ -1,0 +1,245 @@
+# https://github.com/yonaskolb/XcodeGen/blob/master/Docs/ProjectSpec.md
+
+# プロジェクト名（PCSwiftUI）で検索して、適切なプロジェクト名に置換する
+
+# プロジェクト全体の設定
+name: PCSwiftUI
+fileGroups: [PCSwiftUI]
+configs:
+  Debug: debug
+  Release: release
+configFiles:
+  Debug: Configs/Project.Debug.xcconfig
+  Release: Configs/Project.Release.xcconfig
+options:
+  minimumXcodeGenVersion: "2.25.0"
+  usesTabs: false
+  indentWidth: 2
+  tabWidth: 2
+  deploymentTarget:
+    iOS: "14.0"
+  developmentLanguage: ja
+attributes:
+  ORGANIZATIONNAME: "yuoku"
+packages: # SwiftPMで扱うPackageを最初に定義
+  swift-request:
+    url: https://github.com/carson-katri/swift-request
+    exactVersion: 1.4.0
+
+####################
+
+# ビルドターゲット
+targets:
+  # application
+  PCSwiftUI:
+    type: application
+    platform: iOS
+    configFiles:
+      Debug: Configs/Project.Debug.xcconfig
+      Release: Configs/Project.Release.xcconfig
+    sources:
+      - path: PCSwiftUI
+        excludes:
+          - "**/.gitkeep"
+          - "**/*.md"
+    dependencies:
+      - target: Presentation
+    postCompileScripts:
+      - path: ./Scripts/swift-format.sh
+        name: swift-format
+####################
+  # Infrastructure framework
+  Infrastructure:
+    type: framework
+    platform: iOS
+    configFiles:
+      Debug: Configs/Infrastructure.Debug.xcconfig
+      Release: Configs/Infrastructure.Release.xcconfig
+    scheme: {}
+    sources:
+      - path: Infrastructure
+        excludes:
+          - "**/.gitkeep"
+          - "**/*.md"
+    dependencies:
+      - package: swift-request
+        product: Request
+      - package: swift-request
+        product: Json
+      - target: Domain
+####################
+  # Domain framework
+  Domain:
+    type: framework
+    platform: iOS
+    configFiles:
+      Debug: Configs/Domain.Debug.xcconfig
+      Release: Configs/Domain.Release.xcconfig
+    scheme: {}
+    sources:
+      - path: Domain
+        excludes:
+          - "**/.gitkeep"
+          - "**/*.md"
+####################
+  # Application framework
+  Application:
+    type: framework
+    platform: iOS
+    configFiles:
+      Debug: Configs/Application.Debug.xcconfig
+      Release: Configs/Application.Release.xcconfig
+    scheme: {}
+    sources:
+      - path: Application
+        excludes:
+          - "**/.gitkeep"
+          - "**/*.md"
+    dependencies:
+      - target: Domain
+      - target: Infrastructure # RepositoriesのDI用
+####################
+  # Presentation framework
+  Presentation:
+    type: framework
+    platform: iOS
+    configFiles:
+      Debug: Configs/Presentation.Debug.xcconfig
+      Release: Configs/Presentation.Release.xcconfig
+    scheme: {}
+    sources:
+      - path: Presentation
+        excludes:
+          - "**/.gitkeep"
+          - "**/*.md"
+    dependencies:
+      - target: Application
+
+####################
+  # applicationのUnitTestターゲット
+  PCSwiftUITests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'PCSwiftUI.tests'
+      configs:
+        Debug:
+          VALIDATE_WORKSPACE: YES
+    sources:
+      - PCSwiftUITests
+    dependencies:
+      - target: PCSwiftUI
+####################
+  # applicationのUnitTestターゲット
+  PCSwiftUIUITests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'PCSwiftUI.tests'
+      configs:
+        Debug:
+          VALIDATE_WORKSPACE: YES
+    sources:
+      - PCSwiftUITests
+    dependencies:
+      - target: PCSwiftUI
+#####################
+  # Infrastructure frameworkのUnitTestターゲット
+  InfrastructureTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'jp.yuoku.Infrastructure.tests'
+      configs:
+        Debug:
+          VALIDATE_WORKSPACE: YES
+    sources:
+      - InfrastructureTests
+    dependencies:
+      - target: Infrastructure
+#####################
+  # Domain frameworkのUnitTestターゲット
+  DomainTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'jp.yuoku.Domain.tests'
+      configs:
+        Debug:
+          VALIDATE_WORKSPACE: YES
+    sources:
+      - DomainTests
+    dependencies:
+      - target: Domain
+#####################
+  # Application frameworkのUnitTestターゲット
+  ApplicationTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'jp.yuoku.Application.tests'
+      configs:
+        Debug:
+          VALIDATE_WORKSPACE: YES
+    sources:
+      - ApplicationTests
+    dependencies:
+      - target: Application
+#####################
+  # Presentation frameworkのUnitTestターゲット
+  PresentationTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: YES
+      BUNDLE_NAME: 'jp.yuoku.Presentation.tests'
+      configs:
+        Debug:
+          VALIDATE_WORKSPACE: YES
+    sources:
+      - PresentationTests
+    dependencies:
+      - target: Presentation
+
+#####################
+
+# スキーム定義
+schemeTemplates:
+  PCSwiftUIScheme:
+    build:
+      targets:
+        PCSwiftUI: all
+        PCSwiftUITests: [test]
+        PCSwiftUIUITests: [test]
+        InfrastructureTests: [test]
+        DomainTests: [test]
+        ApplicationTests: [test]
+        PresentationTests: [test]
+    run:
+      config: ${debugConfig}
+    test:
+      config: ${debugConfig}
+      targets:
+        - PCSwiftUITests
+        - PCSwiftUIUITests
+        - InfrastructureTests
+        - DomainTests
+        - ApplicationTests
+        - PresentationTests
+    profile:
+      config: ${releaseConfig}
+    analyze:
+      config: ${debugConfig}
+    archive:
+      config: ${releaseConfig}
+schemes:
+  PCSwiftUI:
+    templates: [PCSwiftUIScheme]
+    templateAttributes:
+      debugConfig: Debug
+      releaseConfig: Release
