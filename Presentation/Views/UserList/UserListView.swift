@@ -25,7 +25,7 @@ struct UserListView<R: UserListRouter>: View {
     SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchUsers(searchQuery: store.searchQuery) }) {
       List {
         ForEach(store.userAggregateRoot.users) { user in
-          UserListRow(title: user.login) {
+          UserListRow(title: user.login, avatarUrl: user.avatarUrl) {
             router.navigateToGeneralWebView(urlString: user.htmlUrl.absoluteString)
           }
         }

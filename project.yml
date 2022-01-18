@@ -25,6 +25,9 @@ packages: # SwiftPMで扱うPackageを最初に定義
   swift-request:
     url: https://github.com/carson-katri/swift-request
     exactVersion: 1.4.0
+  Kingfisher:
+    url: https://github.com/onevcat/Kingfisher
+    exactVersion: 7.1.2
 
 ####################
 
@@ -115,6 +118,8 @@ targets:
           - "**/*.md"
     dependencies:
       - target: Application
+      - package: Kingfisher
+        product: Kingfisher
 
 ####################
   # applicationのUnitTestターゲット
