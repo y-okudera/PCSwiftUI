@@ -30,11 +30,7 @@ public final class RepoListStore: ObservableObject {
       switch action {
       case .initializePage:
         self.repoAggregateRoot = .init()
-      case .initializeRepoListState(let newValue):
-        print("initializeRepoListState page=\(self.repoAggregateRoot.page)")
-        self.repoAggregateRoot.set(oldValue: self.repoAggregateRoot, newValue: newValue)
-      case .updateRepoListState(let newValue):
-        print("updateRepoListState page=\(self.repoAggregateRoot.page)")
+      case .updateRepoList(let newValue):
         self.repoAggregateRoot.set(oldValue: self.repoAggregateRoot, newValue: newValue)
       case .updateErrorMessage(let title, let message):
         self.errorTitle = title

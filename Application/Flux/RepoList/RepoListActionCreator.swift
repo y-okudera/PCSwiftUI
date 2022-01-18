@@ -78,7 +78,7 @@ public final class RepoListActionCreator {
     // リポジトリ検索結果を反映
     let responseDataStream =
       responseSubject
-      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.initializeRepoListState($0)) })
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateRepoList($0)) })
 
     // 検索結果が0件の場合、エラーメッセージを更新
     let emptyDataStream =
@@ -94,9 +94,10 @@ public final class RepoListActionCreator {
       .map { _ in }
       .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.showError) })
 
+    // 追加読み込み結果を反映
     let additionalResponseDataStream =
       additionalResponseSubject
-      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateRepoListState($0)) })
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateRepoList($0)) })
 
     // errorSubjectにerrorが送られてきたら、エラーメッセージを更新
     let errorDataStream =
