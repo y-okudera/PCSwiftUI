@@ -11,12 +11,10 @@ import Domain
 enum UserListAction {
   /// ページ番号を初期化する
   case initializePage
-  ///  1ページ目の読み込み結果を反映
-  case initializeUserListState(UserAggregateRoot)
-  ///  2ページ目以降の読み込み結果を反映
-  case updateUserListState(UserAggregateRoot)
-  ///  エラーメッセージを反映
+  /// 読み込み結果を反映
+  case updateUserList(UserAggregateRoot)
+  /// エラーメッセージを反映
   case updateErrorMessage(String, String)
-  ///  エラーを表示
+  /// エラーを表示
   case showError
 }

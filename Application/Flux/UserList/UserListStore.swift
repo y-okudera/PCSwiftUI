@@ -30,12 +30,8 @@ public final class UserListStore: ObservableObject {
       switch action {
       case .initializePage:
         self.userAggregateRoot = .init()
-      case .initializeUserListState(let newValue):
+      case .updateUserList(let newValue):
         self.userAggregateRoot.set(oldValue: self.userAggregateRoot, newValue: newValue)
-        print("initializeRepoListState page=\(self.userAggregateRoot.page) hasNext=\(self.userAggregateRoot.hasNext)")
-      case .updateUserListState(let newValue):
-        self.userAggregateRoot.set(oldValue: self.userAggregateRoot, newValue: newValue)
-        print("updateUserListState page=\(self.userAggregateRoot.page) hasNext=\(self.userAggregateRoot.hasNext)")
       case .updateErrorMessage(let title, let message):
         self.errorTitle = title
         self.errorMessage = message

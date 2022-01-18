@@ -78,7 +78,7 @@ public final class UserListActionCreator {
     // ユーザー検索結果を反映
     let responseDataStream =
       responseSubject
-      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.initializeUserListState($0)) })
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateUserList($0)) })
 
     // 検索結果が0件の場合、エラーメッセージを更新
     let emptyDataStream =
@@ -94,9 +94,10 @@ public final class UserListActionCreator {
       .map { _ in }
       .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.showError) })
 
+    // 追加読み込み結果を反映
     let additionalResponseDataStream =
       additionalResponseSubject
-      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateUserListState($0)) })
+      .sink(receiveValue: { [dispatcher] in dispatcher.dispatch(.updateUserList($0)) })
 
     // errorSubjectにerrorが送られてきたら、エラーメッセージを更新
     let errorDataStream =
