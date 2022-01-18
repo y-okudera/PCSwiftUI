@@ -31,7 +31,7 @@ struct RepoListView<R: RepoListRouter>: View {
         }
         HStack {
           Spacer()
-          ActivityIndicator()
+          ProgressView()
             .onAppear {
               actionCreator.additionalSearchRepositories(searchQuery: store.searchQuery, page: store.repoAggregateRoot.page)
             }

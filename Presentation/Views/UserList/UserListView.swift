@@ -31,7 +31,7 @@ struct UserListView<R: UserListRouter>: View {
         }
         HStack {
           Spacer()
-          ActivityIndicator()
+          ProgressView()
             .onAppear {
               actionCreator.additionalSearchUsers(searchQuery: store.searchQuery, page: store.userAggregateRoot.page)
             }
