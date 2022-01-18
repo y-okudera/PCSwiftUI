@@ -42,6 +42,7 @@ targets:
         excludes:
           - "**/.gitkeep"
           - "**/*.md"
+      - path: Configs
     dependencies:
       - target: Presentation
     postCompileScripts:
