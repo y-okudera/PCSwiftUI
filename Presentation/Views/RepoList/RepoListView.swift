@@ -52,9 +52,11 @@ struct RepoListView<R: RepoListRouter>: View {
 #if DEBUG
   struct RepoListView_Previews: PreviewProvider {
     static var previews: some View {
-      ForEach(ColorScheme.allCases, id: \.self) {
-        RepoListView(router: RepoListRouterImpl(isPresented: .constant(false)))
-          .preferredColorScheme($0)
+      LocalizePreview {
+        ForEach(ColorScheme.allCases, id: \.self) {
+          RepoListView(router: RepoListRouterImpl(isPresented: .constant(false)))
+            .preferredColorScheme($0)
+        }
       }
     }
   }

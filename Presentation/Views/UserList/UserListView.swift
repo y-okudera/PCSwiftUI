@@ -52,9 +52,11 @@ struct UserListView<R: UserListRouter>: View {
 #if DEBUG
   struct UserListView_Previews: PreviewProvider {
     static var previews: some View {
-      ForEach(ColorScheme.allCases, id: \.self) {
-        UserListView(router: UserListRouterImpl(isPresented: .constant(false)))
-          .preferredColorScheme($0)
+      LocalizePreview {
+        ForEach(ColorScheme.allCases, id: \.self) {
+          UserListView(router: UserListRouterImpl(isPresented: .constant(false)))
+            .preferredColorScheme($0)
+        }
       }
     }
   }

@@ -93,9 +93,11 @@ public struct RootView: View {
 #if DEBUG
   struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-      ForEach(ColorScheme.allCases, id: \.self) {
-        RootView()
-          .preferredColorScheme($0)
+      LocalizePreview {
+        ForEach(ColorScheme.allCases, id: \.self) {
+          RootView()
+            .preferredColorScheme($0)
+        }
       }
     }
   }
