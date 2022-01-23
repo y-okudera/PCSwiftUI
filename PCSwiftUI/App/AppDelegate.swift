@@ -21,6 +21,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     UNUserNotificationCenter.current().delegate = self
 
+    // Reset badge number
+    UIApplication.shared.applicationIconBadgeNumber = 0
+
     return true
   }
 }
