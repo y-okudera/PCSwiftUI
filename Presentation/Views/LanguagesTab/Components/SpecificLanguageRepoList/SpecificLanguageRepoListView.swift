@@ -27,6 +27,7 @@ struct SpecificLanguageRepoListView<R: SpecificLanguageRepoListRouter>: View {
     self.actionCreator = actionCreator
   }
 
+  #warning(".pagerTabItemと.onPageAppearがあると、Previewが効かなくなるので修正が必要")
   var body: some View {
     List {
       ForEach(store.languagesRepoAggregateRoot.filterByLanguage(language)) { repository in
