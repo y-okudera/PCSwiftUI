@@ -26,12 +26,14 @@ public struct LanguagesPaginationAggregate: Identifiable, Hashable {
 }
 
 // MARK: - Mock
-extension LanguagesPaginationAggregate {
-  public static var mock: Self {
-    return Self(
-      id: "Swift",
-      page: 1,
-      hasNext: true
-    )
+#if DEBUG
+  extension LanguagesPaginationAggregate {
+    public static var mock: Self {
+      return Self(
+        id: "Swift",
+        page: 1,
+        hasNext: true
+      )
+    }
   }
-}
+#endif

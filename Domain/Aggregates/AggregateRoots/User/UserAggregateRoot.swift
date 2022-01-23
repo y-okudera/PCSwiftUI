@@ -35,3 +35,18 @@ public struct UserAggregateRoot {
     self = .init(page: newValue.page, hasNext: newValue.hasNext, userIDs: userIDs, usersByID: usersByID)
   }
 }
+
+// MARK: - Mock
+#if DEBUG
+  extension UserAggregateRoot {
+    public static func mock(mockAvatarUrl: URL) -> Self {
+      let userAggregateMockArray = UserAggregate.mockArray(mockAvatarUrl: mockAvatarUrl)
+      return Self(
+        page: 1,
+        hasNext: true,
+        userIDs: userAggregateMockArray.map { $0.id },
+        usersByID: userAggregateMockArray.reduce(into: [String: UserAggregate]()) { $0[$1.id] = $1 }
+      )
+    }
+  }
+#endif

@@ -27,13 +27,27 @@ public struct UserAggregate: Decodable, Hashable, Identifiable {
   }
 }
 
-extension UserAggregate {
-  public static var mock: Self {
-    return Self(
-      id: 583231.description,
-      login: "octocat",
-      avatarUrl: URL(string: "https://avatars.githubusercontent.com/u/583231?v=4")!,
-      htmlUrl: URL(string: "https://github.com/octocat")!
-    )
+// MARK: - Mock
+#if DEBUG
+  extension UserAggregate {
+    public static var mock: Self {
+      return Self(
+        id: 583231.description,
+        login: "octocat",
+        avatarUrl: URL(string: "https://avatars.githubusercontent.com/u/583231?v=4")!,
+        htmlUrl: URL(string: "https://github.com/octocat")!
+      )
+    }
+
+    public static func mockArray(mockAvatarUrl: URL) -> [Self] {
+      [Int](0..<20).map {
+        Self(
+          id: $0.description,
+          login: "octocat",
+          avatarUrl: mockAvatarUrl,
+          htmlUrl: URL(string: "https://github.com/octocat")!
+        )
+      }
+    }
   }
-}
+#endif

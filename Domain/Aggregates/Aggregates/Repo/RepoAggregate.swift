@@ -37,21 +37,23 @@ public struct RepoAggregate: Decodable, Hashable, Identifiable {
 }
 
 // MARK: - Mock
-extension RepoAggregate {
-  public static var mock: Self {
-    return Self(
-      id: 1_300_192.description,
-      fullName: "octocat/Spoon-Knife",
-      description: "This repo is for demonstration purposes only.",
-      stargazersCount: 10673,
-      language: "HTML",
-      htmlUrl: URL(string: "https://github.com/octocat/Spoon-Knife")!,
-      owner: UserAggregate(
-        id: 583231.description,
-        login: "octocat",
-        avatarUrl: URL(string: "https://avatars.githubusercontent.com/u/583231?v=4")!,
-        htmlUrl: URL(string: "https://github.com/octocat")!
+#if DEBUG
+  extension RepoAggregate {
+    public static var mock: Self {
+      return Self(
+        id: 1_300_192.description,
+        fullName: "octocat/Spoon-Knife",
+        description: "This repo is for demonstration purposes only.",
+        stargazersCount: 10673,
+        language: "HTML",
+        htmlUrl: URL(string: "https://github.com/octocat/Spoon-Knife")!,
+        owner: UserAggregate(
+          id: 583231.description,
+          login: "octocat",
+          avatarUrl: URL(string: "https://avatars.githubusercontent.com/u/583231?v=4")!,
+          htmlUrl: URL(string: "https://github.com/octocat")!
+        )
       )
-    )
+    }
   }
-}
+#endif

@@ -41,3 +41,14 @@ public final class UserListStore: ObservableObject {
     }
   }
 }
+
+// MARK: - Mock
+#if DEBUG
+  extension UserListStore {
+    public static func mock(mockAvatarUrl: URL) -> Self {
+      let mockStore = Self.init(dispatcher: .init())
+      mockStore.userAggregateRoot = .mock(mockAvatarUrl: mockAvatarUrl)
+      return mockStore
+    }
+  }
+#endif

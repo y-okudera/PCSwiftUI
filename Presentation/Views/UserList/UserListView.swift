@@ -11,11 +11,12 @@ import SwiftUI
 
 struct UserListView<R: UserListRouter>: View {
   @Environment(\.colorScheme) private var colorScheme
-  @ObservedObject var store: UserListStore = .shared
+  @ObservedObject var store: UserListStore
   @StateObject private var router: R
   private var actionCreator: UserListActionCreator
 
-  init(router: R, actionCreator: UserListActionCreator = .init()) {
+  init(store: UserListStore = .shared, router: R, actionCreator: UserListActionCreator = .init()) {
+    self.store = store
     _router = StateObject(wrappedValue: router)
     self.actionCreator = actionCreator
   }
@@ -51,9 +52,11 @@ struct UserListView<R: UserListRouter>: View {
 
 #if DEBUG
   struct UserListView_Previews: PreviewProvider {
+    static let previewContentPath = Bundle.current.path(forResource: "octocat", ofType: "png")!
+    static var store: UserListStore = .mock(mockAvatarUrl: URL(fileURLWithPath: previewContentPath))
     static var previews: some View {
       AppPreview {
-        UserListView(router: UserListRouterImpl(isPresented: .constant(false)))
+        UserListView(store: store, router: UserListRouterImpl(isPresented: .constant(false)))
       }
     }
   }
