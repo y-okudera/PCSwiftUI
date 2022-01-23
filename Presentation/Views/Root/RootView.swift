@@ -93,10 +93,11 @@ public struct RootView: View {
 #if DEBUG
   struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-      LocalizePreview {
-        ColorSchemePreview {
-          RootView()
-            .previewLayout(.sizeThatFits)
+      InterfaceOrientationPreview {
+        LocalizePreview {
+          ColorSchemePreview {
+            RootView()
+          }
         }
       }
     }
