@@ -27,6 +27,7 @@ struct UserListRow: View {
           .cornerRadius(22)
           .shadow(color: colorScheme == .light ? .gray : .clear, radius: 2)
         Text(title)
+          .lineLimit(1)
           .foregroundColor(colorScheme == .light ? .black : .white)
       }
     }
