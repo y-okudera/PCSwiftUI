@@ -20,7 +20,7 @@ struct UserListRow: View {
       HStack {
         KFImage(avatarUrl)
           .cacheOriginalImage()
-          .placeholder { ProgressView($0) }
+          .placeholder { ProgressView() }
           .fade(duration: 0.5)
           .resizable()
           .frame(width: 44, height: 44)
