@@ -11,12 +11,25 @@ import SwiftUI
 struct RepoListRow: View {
   @Environment(\.colorScheme) private var colorScheme
   @State var title: String
+  @State var language: String
   let action: () -> Void
 
   var body: some View {
     Button(action: action) {
-      Text(title)
-        .foregroundColor(colorScheme == .light ? .black : .white)
+      VStack {
+        HStack {
+          Text(title)
+            .lineLimit(1)
+          Spacer()
+        }
+        HStack {
+          Text(language)
+            .lineLimit(1)
+            .font(.caption)
+          Spacer()
+        }
+      }
+      .foregroundColor(colorScheme == .light ? .black : .white)
     }
   }
 }
@@ -25,7 +38,7 @@ struct RepoListRow: View {
   struct RepoListRow_Previews: PreviewProvider {
     static var previews: some View {
       ForEach(ColorScheme.allCases, id: \.self) {
-        RepoListRow(title: "octocat/Spoon-Knife", action: {})
+        RepoListRow(title: "octocat/Spoon-Knife", language: "HTML", action: {})
           .preferredColorScheme($0)
       }
     }

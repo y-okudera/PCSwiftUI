@@ -25,7 +25,7 @@ struct RepoListView<R: RepoListRouter>: View {
     SearchNavigation(text: $store.searchQuery, search: { actionCreator.searchRepositories(searchQuery: store.searchQuery) }) {
       List {
         ForEach(store.repoAggregateRoot.repositories) { repository in
-          RepoListRow(title: repository.fullName) {
+          RepoListRow(title: repository.fullName, language: repository.language ?? "") {
             router.navigateToGeneralWebView(urlString: repository.htmlUrl.absoluteString)
           }
         }

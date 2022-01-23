@@ -23,8 +23,8 @@ public struct RootView: View {
       RepoListView(router: repoListRouter)
         .tabItem {
           VStack {
-            Image(systemName: "magnifyingglass")
-            Text("Search")
+            Image(systemName: "doc.text")
+            Text("Repo")
           }
         }
         .tag(0)
@@ -36,6 +36,14 @@ public struct RootView: View {
           }
         }
         .tag(1)
+      LanguagesTabView()
+        .tabItem {
+          VStack {
+            Image(systemName: "text.magnifyingglass")
+            Text("Languages")
+          }
+        }
+        .tag(2)
     }
     .onOpenURL(perform: { url in
       switch Deeplink(url: url) {

@@ -28,6 +28,9 @@ packages: # SwiftPMで扱うPackageを最初に定義
   Kingfisher:
     url: https://github.com/onevcat/Kingfisher
     exactVersion: 7.1.2
+  PagerTabStripView:
+    url: https://github.com/xmartlabs/PagerTabStripView
+    exactVersion: 3.1.1
 
 ####################
 
@@ -120,6 +123,8 @@ targets:
       - target: Application
       - package: Kingfisher
         product: Kingfisher
+      - package: PagerTabStripView
+        product: PagerTabStripView
 
 ####################
   # applicationのUnitTestターゲット
