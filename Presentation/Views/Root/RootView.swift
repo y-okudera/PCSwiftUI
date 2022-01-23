@@ -22,7 +22,7 @@ public struct RootView: View {
         .tabItem {
           VStack {
             Image(systemName: "doc.text")
-            Text("Repo")
+            Text("root_view.tab.repositories", bundle: .current)
           }
         }
         .tag(0)
@@ -30,7 +30,7 @@ public struct RootView: View {
         .tabItem {
           VStack {
             Image(systemName: "person.fill")
-            Text("User")
+            Text("root_view.tab.users", bundle: .current)
           }
         }
         .tag(1)
@@ -38,7 +38,7 @@ public struct RootView: View {
         .tabItem {
           VStack {
             Image(systemName: "text.magnifyingglass")
-            Text("Languages")
+            Text("root_view.tab.languages", bundle: .current)
           }
         }
         .tag(2)

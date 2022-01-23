@@ -42,7 +42,7 @@ struct RepoListView<R: RepoListRouter>: View {
       .alert(isPresented: $store.isErrorShown) { () -> Alert in
         Alert(title: Text(store.errorTitle), message: Text(store.errorMessage))
       }
-      .navigationBarTitle(Text("Repositories"))
+      .navigationBarTitle(Text("repo_list_view.navigation_bar_title.repositories", bundle: .current))
       .navigation(router)
     }
     .edgesIgnoringSafeArea([.top, .bottom])

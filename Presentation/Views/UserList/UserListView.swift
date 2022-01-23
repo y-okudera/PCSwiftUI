@@ -42,7 +42,7 @@ struct UserListView<R: UserListRouter>: View {
       .alert(isPresented: $store.isErrorShown) { () -> Alert in
         Alert(title: Text(store.errorTitle), message: Text(store.errorMessage))
       }
-      .navigationBarTitle(Text("Users"))
+      .navigationBarTitle(Text("user_list_view.navigation_bar_title.users", bundle: .current))
       .navigation(router)
     }
     .edgesIgnoringSafeArea([.top, .bottom])
