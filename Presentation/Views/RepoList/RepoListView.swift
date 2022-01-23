@@ -52,12 +52,8 @@ struct RepoListView<R: RepoListRouter>: View {
 #if DEBUG
   struct RepoListView_Previews: PreviewProvider {
     static var previews: some View {
-      InterfaceOrientationPreview {
-        LocalizePreview {
-          ColorSchemePreview {
-            RepoListView(router: RepoListRouterImpl(isPresented: .constant(false)))
-          }
-        }
+      AppPreview {
+        RepoListView(router: RepoListRouterImpl(isPresented: .constant(false)))
       }
     }
   }

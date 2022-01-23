@@ -39,9 +39,9 @@ private struct LandscapeModifier: ViewModifier {
   }
 }
 
-// MARK: - fileprivate extension
+// MARK: - extension
 extension View {
-  fileprivate func landscape() -> some View {
+  func landscape() -> some View {
     self.modifier(LandscapeModifier())
   }
 }

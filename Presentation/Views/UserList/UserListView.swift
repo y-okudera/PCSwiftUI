@@ -52,12 +52,8 @@ struct UserListView<R: UserListRouter>: View {
 #if DEBUG
   struct UserListView_Previews: PreviewProvider {
     static var previews: some View {
-      InterfaceOrientationPreview {
-        LocalizePreview {
-          ColorSchemePreview {
-            UserListView(router: UserListRouterImpl(isPresented: .constant(false)))
-          }
-        }
+      AppPreview {
+        UserListView(router: UserListRouterImpl(isPresented: .constant(false)))
       }
     }
   }

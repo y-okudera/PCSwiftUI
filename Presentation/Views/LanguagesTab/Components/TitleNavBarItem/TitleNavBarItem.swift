@@ -21,3 +21,14 @@ struct TitleNavBarItem: View {
     .frame(minWidth: 35.0, maxHeight: .infinity)
   }
 }
+
+#if DEBUG
+  struct TitleNavBarItem_Previews: PreviewProvider {
+    static var previews: some View {
+      ColorSchemePreview {
+        TitleNavBarItem(title: "Swift")
+          .previewLayout(.sizeThatFits)
+      }
+    }
+  }
+#endif
