@@ -10,9 +10,7 @@ import SwiftUI
 
 public struct RootView: View {
 
-  public init() {
-
-  }
+  public init() {}
 
   @State private var tabIndex: Int = 0
   private let repoListRouter = RepoListRouterImpl(isPresented: .constant(false))
@@ -45,37 +43,39 @@ public struct RootView: View {
         }
         .tag(2)
     }
-    .onOpenURL(perform: { url in
-      switch Deeplink(url: url) {
-      case .tab(let index):
-        print("Deeplink .tab index=\(index)")
-        // タブを選択
-        tabIndex = index
-      case .repo(let urlString):
-        print("Deeplink .repo urlString=\(urlString)")
-        // Searchタブを選択
-        tabIndex = 0
-        // 指定タブのナビゲーションスタックのルートまでPopする
-        popToRootView(tabIndex: 0)
-        // 遷移アニメーションが見えるようにするためdelayをかける
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750)) {
-          repoListRouter.navigateToGeneralWebView(urlString: urlString)
-        }
+    .onOpenURL(
+      perform: { url in
+        switch Deeplink(url: url) {
+        case .tab(let index):
+          print("Deeplink .tab index=\(index)")
+          // タブを選択
+          tabIndex = index
+        case .repo(let urlString):
+          print("Deeplink .repo urlString=\(urlString)")
+          // Searchタブを選択
+          tabIndex = 0
+          // 指定タブのナビゲーションスタックのルートまでPopする
+          popToRootView(tabIndex: 0)
+          // 遷移アニメーションが見えるようにするためdelayをかける
+          DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750)) {
+            repoListRouter.navigateToGeneralWebView(urlString: urlString)
+          }
 
-      case .user(let urlString):
-        print("Deeplink .user urlString=\(urlString)")
-        // Userタブを選択
-        tabIndex = 1
-        // 指定タブのナビゲーションスタックのルートまでPopする
-        popToRootView(tabIndex: 1)
-        // 遷移アニメーションが見えるようにするためdelayをかける
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750)) {
-          userListRouter.navigateToGeneralWebView(urlString: urlString)
+        case .user(let urlString):
+          print("Deeplink .user urlString=\(urlString)")
+          // Userタブを選択
+          tabIndex = 1
+          // 指定タブのナビゲーションスタックのルートまでPopする
+          popToRootView(tabIndex: 1)
+          // 遷移アニメーションが見えるようにするためdelayをかける
+          DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(750)) {
+            userListRouter.navigateToGeneralWebView(urlString: urlString)
+          }
+        case .none:
+          print("Deeplink none.")
         }
-      case .none:
-        print("Deeplink none.")
       }
-    })
+    )
   }
 
   private func popToRootView(tabIndex: Int) {

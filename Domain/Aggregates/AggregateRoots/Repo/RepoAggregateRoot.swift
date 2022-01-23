@@ -11,9 +11,9 @@ import Foundation
 public struct RepoAggregateRoot {
   public let page: Int
   public let hasNext: Bool
-  public let repositoryIDs: [String]
-  public let repositoriesByID: [String: RepoAggregate]
-  public let ownersByID: [String: UserAggregate]
+  private let repositoryIDs: [String]
+  private let repositoriesByID: [String: RepoAggregate]
+  private let ownersByID: [String: UserAggregate]
 
   public var repositories: [RepoAggregate] {
     repositoryIDs.compactMap { repositoriesByID[$0] }
@@ -37,10 +37,10 @@ public struct RepoAggregateRoot {
     self.init(page: 1, hasNext: false, repositoryIDs: [], repositoriesByID: [:], ownersByID: [:])
   }
 
-  public mutating func set(oldValue: RepoAggregateRoot, newValue: RepoAggregateRoot) {
-    let repositoryIDs = oldValue.repositoryIDs + newValue.repositoryIDs
-    let repositoriesByID = oldValue.repositoriesByID.merging(newValue.repositoriesByID) { $1 }
-    let ownersByID = oldValue.ownersByID.merging(newValue.ownersByID) { $1 }
+  public mutating func set(newValue: RepoAggregateRoot) {
+    let repositoryIDs = repositoryIDs + newValue.repositoryIDs
+    let repositoriesByID = repositoriesByID.merging(newValue.repositoriesByID) { $1 }
+    let ownersByID = ownersByID.merging(newValue.ownersByID) { $1 }
 
     self = .init(
       page: newValue.page,

@@ -11,19 +11,16 @@ import Domain
 
 public final class SpecificLanguageRepoListActionCreator {
   private let dispatcher: SpecificLanguageRepoListDispatcher
-
-  @Injected(\.languagesRepoRepositoryProvider)
-  private var languagesRepoRepository: LanguagesRepoRepositoryProviding
+  private let searchRepositoriesSubject = PassthroughSubject<String, Never>()
+  private let responseSubject = PassthroughSubject<LanguagesRepoAggregateRoot, Never>()
+  private let additionalSearchRepositoriesSubject = PassthroughSubject<(String, Int), Never>()
+  private let additionalResponseSubject = PassthroughSubject<LanguagesRepoAggregateRoot, Never>()
+  private let errorSubject = PassthroughSubject<APIError, Never>()
 
   private var cancellables: [AnyCancellable] = []
 
-  private let searchRepositoriesSubject = PassthroughSubject<String, Never>()
-  private let responseSubject = PassthroughSubject<LanguagesRepoAggregateRoot, Never>()
-
-  private let additionalSearchRepositoriesSubject = PassthroughSubject<(String, Int), Never>()
-  private let additionalResponseSubject = PassthroughSubject<LanguagesRepoAggregateRoot, Never>()
-
-  private let errorSubject = PassthroughSubject<APIError, Never>()
+  @Injected(\.languagesRepoRepositoryProvider)
+  private var languagesRepoRepository: LanguagesRepoRepositoryProviding
 
   public init(dispatcher: SpecificLanguageRepoListDispatcher = .shared) {
     self.dispatcher = dispatcher

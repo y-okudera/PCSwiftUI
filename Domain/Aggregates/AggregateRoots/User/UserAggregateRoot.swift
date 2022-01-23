@@ -11,8 +11,8 @@ import Foundation
 public struct UserAggregateRoot {
   public let page: Int
   public let hasNext: Bool
-  public let userIDs: [String]
-  public let usersByID: [String: UserAggregate]
+  private let userIDs: [String]
+  private let usersByID: [String: UserAggregate]
 
   public var users: [UserAggregate] {
     userIDs.compactMap { usersByID[$0] }
@@ -29,9 +29,9 @@ public struct UserAggregateRoot {
     self.init(page: 1, hasNext: false, userIDs: [], usersByID: [:])
   }
 
-  public mutating func set(oldValue: UserAggregateRoot, newValue: UserAggregateRoot) {
-    let userIDs = oldValue.userIDs + newValue.userIDs
-    let usersByID = oldValue.usersByID.merging(newValue.usersByID) { $1 }
+  public mutating func set(newValue: UserAggregateRoot) {
+    let userIDs = userIDs + newValue.userIDs
+    let usersByID = usersByID.merging(newValue.usersByID) { $1 }
     self = .init(page: newValue.page, hasNext: newValue.hasNext, userIDs: userIDs, usersByID: usersByID)
   }
 }

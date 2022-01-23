@@ -31,7 +31,7 @@ public final class RepoListStore: ObservableObject {
       case .initializePage:
         self.repoAggregateRoot = .init()
       case .updateRepoList(let newValue):
-        self.repoAggregateRoot.set(oldValue: self.repoAggregateRoot, newValue: newValue)
+        self.repoAggregateRoot.set(newValue: newValue)
       case .updateErrorMessage(let title, let message):
         self.errorTitle = title
         self.errorMessage = message

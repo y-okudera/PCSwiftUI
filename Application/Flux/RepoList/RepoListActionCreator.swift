@@ -11,19 +11,16 @@ import Domain
 
 public final class RepoListActionCreator {
   private let dispatcher: RepoListDispatcher
-
-  @Injected(\.repoRepositoryProvider)
-  private var repoRepository: RepoRepositoryProviding
+  private let searchRepositoriesSubject = PassthroughSubject<String, Never>()
+  private let responseSubject = PassthroughSubject<RepoAggregateRoot, Never>()
+  private let additionalSearchRepositoriesSubject = PassthroughSubject<(String, Int), Never>()
+  private let additionalResponseSubject = PassthroughSubject<RepoAggregateRoot, Never>()
+  private let errorSubject = PassthroughSubject<APIError, Never>()
 
   private var cancellables: [AnyCancellable] = []
 
-  private let searchRepositoriesSubject = PassthroughSubject<String, Never>()
-  private let responseSubject = PassthroughSubject<RepoAggregateRoot, Never>()
-
-  private let additionalSearchRepositoriesSubject = PassthroughSubject<(String, Int), Never>()
-  private let additionalResponseSubject = PassthroughSubject<RepoAggregateRoot, Never>()
-
-  private let errorSubject = PassthroughSubject<APIError, Never>()
+  @Injected(\.repoRepositoryProvider)
+  private var repoRepository: RepoRepositoryProviding
 
   public init(dispatcher: RepoListDispatcher = .shared) {
     self.dispatcher = dispatcher
@@ -33,8 +30,9 @@ public final class RepoListActionCreator {
 
   func bindData() {
     // searchRepositoriesSubjectにstringが送られてきたらAPIリクエストする
-    let responsePublisher =
-      searchRepositoriesSubject.share()
+    let responseStream =
+      searchRepositoriesSubject
+      .share()
       .map { [dispatcher] searchQuery in
         dispatcher.dispatch(.initializePage)
         return searchQuery
@@ -46,15 +44,13 @@ public final class RepoListActionCreator {
             return .init()
           }
       }
-
-    let responseStream =
-      responsePublisher
       .share()
       .subscribe(responseSubject)
 
     // additionalSearchRepositoriesSubjectに(string, int)が送られてきたら追加読み込みのAPIリクエストする
-    let additionalResponsePublisher =
-      additionalSearchRepositoriesSubject.share()
+    let additionalResponseStream =
+      additionalSearchRepositoriesSubject
+      .share()
       .flatMap { [repoRepository] searchQuery, page in
         repoRepository.response(searchQuery: searchQuery, page: page)
           .catch { [weak self] apiError -> Empty<RepoAggregateRoot, Never> in
@@ -62,9 +58,6 @@ public final class RepoListActionCreator {
             return .init()
           }
       }
-
-    let additionalResponseStream =
-      additionalResponsePublisher
       .share()
       .subscribe(additionalResponseSubject)
 
@@ -123,6 +116,10 @@ public final class RepoListActionCreator {
       errorStream,
     ]
   }
+}
+
+// MARK: - Input
+extension RepoListActionCreator {
 
   public func searchRepositories(searchQuery: String) {
     searchRepositoriesSubject.send(searchQuery)

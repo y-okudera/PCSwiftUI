@@ -11,19 +11,16 @@ import Domain
 
 public final class UserListActionCreator {
   private let dispatcher: UserListDispatcher
-
-  @Injected(\.userRepositoryProvider)
-  private var userRepository: UserRepositoryProviding
+  private let searchUsersSubject = PassthroughSubject<String, Never>()
+  private let responseSubject = PassthroughSubject<UserAggregateRoot, Never>()
+  private let additionalSearchUsersSubject = PassthroughSubject<(String, Int), Never>()
+  private let additionalResponseSubject = PassthroughSubject<UserAggregateRoot, Never>()
+  private let errorSubject = PassthroughSubject<APIError, Never>()
 
   private var cancellables: [AnyCancellable] = []
 
-  private let searchUsersSubject = PassthroughSubject<String, Never>()
-  private let responseSubject = PassthroughSubject<UserAggregateRoot, Never>()
-
-  private let additionalSearchUsersSubject = PassthroughSubject<(String, Int), Never>()
-  private let additionalResponseSubject = PassthroughSubject<UserAggregateRoot, Never>()
-
-  private let errorSubject = PassthroughSubject<APIError, Never>()
+  @Injected(\.userRepositoryProvider)
+  private var userRepository: UserRepositoryProviding
 
   public init(dispatcher: UserListDispatcher = .shared) {
     self.dispatcher = dispatcher
@@ -33,8 +30,9 @@ public final class UserListActionCreator {
 
   func bindData() {
     // searchUsersSubjectにstringが送られてきたらAPIリクエストする
-    let responsePublisher =
-      searchUsersSubject.share()
+    let responseStream =
+      searchUsersSubject
+      .share()
       .map { [dispatcher] searchQuery in
         dispatcher.dispatch(.initializePage)
         return searchQuery
@@ -46,15 +44,13 @@ public final class UserListActionCreator {
             return .init()
           }
       }
-
-    let responseStream =
-      responsePublisher
       .share()
       .subscribe(responseSubject)
 
     // additionalSearchUsersSubjectに(string, int)が送られてきたら追加読み込みのAPIリクエストする
-    let additionalResponsePublisher =
-      additionalSearchUsersSubject.share()
+    let additionalResponseStream =
+      additionalSearchUsersSubject
+      .share()
       .flatMap { [userRepository] searchQuery, page in
         userRepository.response(searchQuery: searchQuery, page: page)
           .catch { [weak self] apiError -> Empty<UserAggregateRoot, Never> in
@@ -62,9 +58,6 @@ public final class UserListActionCreator {
             return .init()
           }
       }
-
-    let additionalResponseStream =
-      additionalResponsePublisher
       .share()
       .subscribe(additionalResponseSubject)
 
@@ -123,6 +116,10 @@ public final class UserListActionCreator {
       errorStream,
     ]
   }
+}
+
+// MARK: - Input
+extension UserListActionCreator {
 
   public func searchUsers(searchQuery: String) {
     searchUsersSubject.send(searchQuery)

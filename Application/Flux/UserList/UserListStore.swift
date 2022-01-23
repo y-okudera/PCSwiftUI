@@ -31,7 +31,7 @@ public final class UserListStore: ObservableObject {
       case .initializePage:
         self.userAggregateRoot = .init()
       case .updateUserList(let newValue):
-        self.userAggregateRoot.set(oldValue: self.userAggregateRoot, newValue: newValue)
+        self.userAggregateRoot.set(newValue: newValue)
       case .updateErrorMessage(let title, let message):
         self.errorTitle = title
         self.errorMessage = message

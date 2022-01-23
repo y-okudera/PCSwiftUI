@@ -11,10 +11,6 @@ import Combine
 public final class SpecificLanguageRepoListDispatcher {
   public static let shared = SpecificLanguageRepoListDispatcher()
 
-  public init() {
-
-  }
-
   private let actionSubject = PassthroughSubject<SpecificLanguageRepoListAction, Never>()
   private var cancellables: [AnyCancellable] = []
 

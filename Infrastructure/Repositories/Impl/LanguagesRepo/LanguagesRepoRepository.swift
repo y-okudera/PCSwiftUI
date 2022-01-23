@@ -11,9 +11,7 @@ import Domain
 
 public struct LanguagesRepoRepository: LanguagesRepoRepositoryProviding {
 
-  public init() {
-
-  }
+  public init() {}
 
   @Injected(\.apiClientProvider)
   private var apiClient: APIClientProviding

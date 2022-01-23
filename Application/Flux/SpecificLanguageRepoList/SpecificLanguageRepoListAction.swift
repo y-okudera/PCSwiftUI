@@ -9,8 +9,6 @@
 import Domain
 
 enum SpecificLanguageRepoListAction {
-  /// ページ番号を初期化する
-  case initializePage
   /// 読み込み結果を反映
   case updateRepoList(LanguagesRepoAggregateRoot)
   /// エラーメッセージを反映

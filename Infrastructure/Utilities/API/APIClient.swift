@@ -17,9 +17,7 @@ public protocol APIClientProviding {
 
 public struct APIClient: APIClientProviding {
 
-  public init() {
-
-  }
+  public init() {}
 
   public func response<T: APIRequestable>(from apiRequest: T) -> AnyPublisher<APIResponse<T.Response>, Error> {
     Request {

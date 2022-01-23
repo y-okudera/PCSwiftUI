@@ -11,10 +11,9 @@ import SwiftUI
 
 struct RepoListView<R: RepoListRouter>: View {
   @Environment(\.colorScheme) private var colorScheme
-
   @ObservedObject var store: RepoListStore = .shared
-  private var actionCreator: RepoListActionCreator
   @StateObject private var router: R
+  private var actionCreator: RepoListActionCreator
 
   init(router: R, actionCreator: RepoListActionCreator = .init()) {
     _router = StateObject(wrappedValue: router)

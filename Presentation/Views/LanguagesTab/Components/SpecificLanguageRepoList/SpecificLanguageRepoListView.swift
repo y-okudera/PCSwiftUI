@@ -11,11 +11,11 @@ import PagerTabStripView
 import SwiftUI
 
 struct SpecificLanguageRepoListView<R: SpecificLanguageRepoListRouter>: View {
-  private let language: String
-  private var actionCreator: SpecificLanguageRepoListActionCreator
   @Environment(\.colorScheme) private var colorScheme
   @ObservedObject private var store: SpecificLanguageRepoListStore = .shared
   @StateObject private var router: R
+  private let language: String
+  private var actionCreator: SpecificLanguageRepoListActionCreator
 
   init(
     router: R,

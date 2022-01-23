@@ -11,10 +11,9 @@ import SwiftUI
 
 struct UserListView<R: UserListRouter>: View {
   @Environment(\.colorScheme) private var colorScheme
-
   @ObservedObject var store: UserListStore = .shared
-  private var actionCreator: UserListActionCreator
   @StateObject private var router: R
+  private var actionCreator: UserListActionCreator
 
   init(router: R, actionCreator: UserListActionCreator = .init()) {
     _router = StateObject(wrappedValue: router)

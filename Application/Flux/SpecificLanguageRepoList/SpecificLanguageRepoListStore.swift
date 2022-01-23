@@ -28,8 +28,6 @@ public final class SpecificLanguageRepoListStore: ObservableObject {
       guard let self = self else { return }
 
       switch action {
-      case .initializePage:
-        self.languagesRepoAggregateRoot = .init()
       case .updateRepoList(let newValue):
         self.languagesRepoAggregateRoot.set(newValue: newValue)
       case .updateErrorMessage(let title, let message):
