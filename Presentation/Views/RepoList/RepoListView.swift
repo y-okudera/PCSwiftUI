@@ -53,9 +53,9 @@ struct RepoListView<R: RepoListRouter>: View {
   struct RepoListView_Previews: PreviewProvider {
     static var previews: some View {
       LocalizePreview {
-        ForEach(ColorScheme.allCases, id: \.self) {
+        ColorSchemePreview {
           RepoListView(router: RepoListRouterImpl(isPresented: .constant(false)))
-            .preferredColorScheme($0)
+            .previewLayout(.sizeThatFits)
         }
       }
     }

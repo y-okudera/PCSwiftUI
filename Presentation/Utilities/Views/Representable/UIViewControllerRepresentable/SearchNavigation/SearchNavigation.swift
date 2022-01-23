@@ -72,12 +72,12 @@ struct SearchNavigation<Content: View>: UIViewControllerRepresentable {
   struct SearchNavigation_Previews: PreviewProvider {
     @State static private var searchQuery = ""
     static var previews: some View {
-      ForEach(ColorScheme.allCases, id: \.self) {
+      ColorSchemePreview {
         SearchNavigation(text: $searchQuery, search: {}) {
           EmptyView()
             .navigationBarTitle(Text("Preview"))
         }
-        .preferredColorScheme($0)
+        .previewLayout(.sizeThatFits)
       }
     }
   }

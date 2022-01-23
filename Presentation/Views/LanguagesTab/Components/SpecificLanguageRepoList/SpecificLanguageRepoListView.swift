@@ -68,10 +68,13 @@ struct SpecificLanguageRepoListView<R: SpecificLanguageRepoListRouter>: View {
 #if DEBUG
   struct SpecificLanguageRepoListView_Previews: PreviewProvider {
     static var previews: some View {
-      SpecificLanguageRepoListView(
-        router: SpecificLanguageRepoListRouterImpl(isPresented: .constant(false)),
-        language: "Swift"
-      )
+      ColorSchemePreview {
+        SpecificLanguageRepoListView(
+          router: SpecificLanguageRepoListRouterImpl(isPresented: .constant(false)),
+          language: "Swift"
+        )
+        .previewLayout(.sizeThatFits)
+      }
     }
   }
 #endif

@@ -37,13 +37,13 @@ struct UserListRow: View {
   struct UserListRow_Previews: PreviewProvider {
     static var previews: some View {
       let previewContentPath = Bundle.current.path(forResource: "octocat", ofType: "png")!
-      ForEach(ColorScheme.allCases, id: \.self) {
+      ColorSchemePreview {
         UserListRow(
           title: "octocat",
           avatarUrl: URL(fileURLWithPath: previewContentPath),
           action: {}
         )
-        .preferredColorScheme($0)
+        .previewLayout(.sizeThatFits)
       }
     }
   }

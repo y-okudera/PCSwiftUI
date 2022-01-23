@@ -37,9 +37,9 @@ struct RepoListRow: View {
 #if DEBUG
   struct RepoListRow_Previews: PreviewProvider {
     static var previews: some View {
-      ForEach(ColorScheme.allCases, id: \.self) {
+      ColorSchemePreview {
         RepoListRow(title: "octocat/Spoon-Knife", language: "HTML", action: {})
-          .preferredColorScheme($0)
+          .previewLayout(.sizeThatFits)
       }
     }
   }

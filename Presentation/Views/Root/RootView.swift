@@ -94,9 +94,9 @@ public struct RootView: View {
   struct RootView_Previews: PreviewProvider {
     static var previews: some View {
       LocalizePreview {
-        ForEach(ColorScheme.allCases, id: \.self) {
+        ColorSchemePreview {
           RootView()
-            .preferredColorScheme($0)
+            .previewLayout(.sizeThatFits)
         }
       }
     }

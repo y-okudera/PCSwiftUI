@@ -40,9 +40,9 @@ struct LanguagesTabView: View {
 #if DEBUG
   struct LanguagesTabView_Previews: PreviewProvider {
     static var previews: some View {
-      ForEach(ColorScheme.allCases, id: \.self) {
+      ColorSchemePreview {
         LanguagesTabView()
-          .preferredColorScheme($0)
+          .previewLayout(.sizeThatFits)
       }
     }
   }

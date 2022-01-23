@@ -53,9 +53,9 @@ struct UserListView<R: UserListRouter>: View {
   struct UserListView_Previews: PreviewProvider {
     static var previews: some View {
       LocalizePreview {
-        ForEach(ColorScheme.allCases, id: \.self) {
+        ColorSchemePreview {
           UserListView(router: UserListRouterImpl(isPresented: .constant(false)))
-            .preferredColorScheme($0)
+            .previewLayout(.sizeThatFits)
         }
       }
     }

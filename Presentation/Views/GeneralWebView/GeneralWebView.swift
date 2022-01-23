@@ -25,9 +25,12 @@ struct GeneralWebView: View {
 #if DEBUG
   struct GeneralWebView_Previews: PreviewProvider {
     static var previews: some View {
-      ForEach(ColorScheme.allCases, id: \.self) {
-        GeneralWebView(urlString: "https://github.com/octocat", router: Router(isPresented: .constant(false)))
-          .preferredColorScheme($0)
+      ColorSchemePreview {
+        GeneralWebView(
+          urlString: "https://github.com/octocat",
+          router: Router(isPresented: .constant(false))
+        )
+        .previewLayout(.sizeThatFits)
       }
     }
   }
