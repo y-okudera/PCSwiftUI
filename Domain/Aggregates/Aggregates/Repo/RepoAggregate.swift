@@ -55,5 +55,24 @@ public struct RepoAggregate: Decodable, Hashable, Identifiable {
         )
       )
     }
+
+    public static var mockArray: [Self] {
+      [Int](0..<20).map {
+        Self(
+          id: $0.description,
+          fullName: "octocat/Spoon-Knife",
+          description: "This repo is for demonstration purposes only.",
+          stargazersCount: $0,
+          language: "HTML",
+          htmlUrl: URL(string: "https://github.com/octocat/Spoon-Knife")!,
+          owner: UserAggregate(
+            id: $0.description,
+            login: "octocat",
+            avatarUrl: URL(string: "https://avatars.githubusercontent.com/u/583231?v=4")!,
+            htmlUrl: URL(string: "https://github.com/octocat")!
+          )
+        )
+      }
+    }
   }
 #endif

@@ -41,3 +41,14 @@ public final class RepoListStore: ObservableObject {
     }
   }
 }
+
+// MARK: - Mock
+#if DEBUG
+  extension RepoListStore {
+    public static var mock: Self {
+      let mockStore = Self.init(dispatcher: .init())
+      mockStore.repoAggregateRoot = .mock
+      return mockStore
+    }
+  }
+#endif

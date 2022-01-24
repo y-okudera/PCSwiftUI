@@ -11,11 +11,12 @@ import SwiftUI
 
 struct RepoListView<R: RepoListRouter>: View {
   @Environment(\.colorScheme) private var colorScheme
-  @ObservedObject var store: RepoListStore = .shared
+  @ObservedObject var store: RepoListStore
   @StateObject private var router: R
   private var actionCreator: RepoListActionCreator
 
-  init(router: R, actionCreator: RepoListActionCreator = .init()) {
+  init(store: RepoListStore = .shared, router: R, actionCreator: RepoListActionCreator = .init()) {
+    self.store = store
     _router = StateObject(wrappedValue: router)
     self.actionCreator = actionCreator
   }
@@ -53,7 +54,7 @@ struct RepoListView<R: RepoListRouter>: View {
   struct RepoListView_Previews: PreviewProvider {
     static var previews: some View {
       AppPreview {
-        RepoListView(router: RepoListRouterImpl(isPresented: .constant(false)))
+        RepoListView(store: .mock, router: RepoListRouterImpl(isPresented: .constant(false)))
       }
     }
   }

@@ -51,3 +51,19 @@ public struct RepoAggregateRoot {
     )
   }
 }
+
+// MARK: - Mock
+#if DEBUG
+  extension RepoAggregateRoot {
+    public static var mock: Self {
+      let repoAggregateMockArray = RepoAggregate.mockArray
+      return Self(
+        page: 1,
+        hasNext: true,
+        repositoryIDs: repoAggregateMockArray.map { $0.id },
+        repositoriesByID: repoAggregateMockArray.reduce(into: [String: RepoAggregate]()) { $0[$1.id] = $1 },
+        ownersByID: repoAggregateMockArray.reduce(into: [String: UserAggregate]()) { $0[$1.owner.id] = $1.owner }
+      )
+    }
+  }
+#endif
