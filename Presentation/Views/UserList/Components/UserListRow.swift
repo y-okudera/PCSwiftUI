@@ -37,11 +37,10 @@ struct UserListRow: View {
 #if DEBUG
   struct UserListRow_Previews: PreviewProvider {
     static var previews: some View {
-      let previewContentPath = Bundle.current.path(forResource: "octocat", ofType: "png")!
       ColorSchemePreview {
         UserListRow(
           title: "octocat",
-          avatarUrl: URL(fileURLWithPath: previewContentPath),
+          avatarUrl: resourceUrl(name: "octocat", ofType: "png"),
           action: {}
         )
         .previewLayout(.sizeThatFits)

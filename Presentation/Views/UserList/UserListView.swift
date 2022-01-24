@@ -52,11 +52,12 @@ struct UserListView<R: UserListRouter>: View {
 
 #if DEBUG
   struct UserListView_Previews: PreviewProvider {
-    static let previewContentPath = Bundle.current.path(forResource: "octocat", ofType: "png")!
-    static var store: UserListStore = .mock(mockAvatarUrl: URL(fileURLWithPath: previewContentPath))
     static var previews: some View {
       AppPreview {
-        UserListView(store: store, router: UserListRouterImpl(isPresented: .constant(false)))
+        UserListView(
+          store: .mock(mockAvatarUrl: resourceUrl(name: "octocat", ofType: "png")),
+          router: UserListRouterImpl(isPresented: .constant(false))
+        )
       }
     }
   }
